@@ -11,7 +11,7 @@
  //     $('<li></li>').text(num).appendTo(ul);
  // };
 
- console.log('****???????????***')
+console.log('*88***')
 
 class App extends React.Component {
   constructor(props) {
@@ -19,11 +19,33 @@ class App extends React.Component {
     this.state = {
      reviews: reviews
   };
+  var context = this;
+    $.ajax({
+    type: "GET",
+    url: 'http://localhost:3000/alldata',
+    dataType: 'json',
+    success: function (data) {
+      console.log('success on GET')
+      context.setState({reviews:data});
+    },
+    error: function (error) {
+      console.log(error)
+    }
+  });
   
-}  
+}
+
+queryByName (e) {
+  console.log(e.target.value);
+}
+
+
+queryByLocation (e) {
+  console.log(e.target.value);
+}
 
 filterCategory (value) {
-  var context = this;
+var context = this;
   console.log({'query':value.id})
   $.ajax({
     type: "POST",
@@ -36,6 +58,7 @@ filterCategory (value) {
       context.setState({reviews:data})
     },
     error: function (error) {
+      console.log('you have an error')
       console.log(error)
     }
   });
@@ -51,7 +74,7 @@ filterCategory (value) {
      <span   id = "Massage Parlors" onClick = {function () {this.filterCategory(document.getElementById('Massage Parlors'))}.bind(this) }> Massage Parlors    </span> 
      <div> - </div>
      
-      <Review reviews = {this.state.reviews}/>
+      <Review reviews = {this.state.reviews} inputBusiness = {this.queryByName} inputLocation = {this.queryByLocation}/>
      
     </div>
    )

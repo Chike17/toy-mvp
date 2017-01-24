@@ -1,29 +1,24 @@
 import React from 'react'
 import Reviews from './Reviews.js'
-
-var Review = (props) => {
+//should call this component input
+var Review = ({inputBusiness,inputLocation, reviews}) => {
  return (
    <div>
    <form >
-        <span>
         <label>
           Business Name -:
-          <input />
+          <input onChange = {inputBusiness} />
         </label>
-        </span>
 
-         <span>
         <label>
           Location -:
-          <input />
+          <input onChange = {inputLocation} />
         </label>
-        </span>
 
         <div> - </div>
-
     </form>
 
-    <Reviews eachReview =  {props.reviews}/> 
+    <Reviews eachReview =  {reviews}/> 
    </div>
  	)
 }
