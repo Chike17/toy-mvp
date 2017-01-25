@@ -25,7 +25,7 @@ app.use(express.static(__dirname));
 
 
 
-var review = {'name': 'server', 'review': 'server', 'rating': 'server', 'location': 'server', 'category': 'Massage Parlors'}
+var review = {'name': 'Neverland Nails', 'review': 'A Nail Salons review', 'rating': 'A Nail Salons rating', 'location': 'New York', 'category':'Nail Salons'}
 
 
 
@@ -38,9 +38,9 @@ var review = {'name': 'server', 'review': 'server', 'rating': 'server', 'locatio
 
 // rvw.save();
 
- // Review.find({}).exec(function (error, data) {
- //    console.log(data);
- //  })
+ Review.find({}).exec(function (error, data) {
+    console.log(data)
+  })
 
 app.get('/alldata', function (req, res) {
   Review.find({}).exec(function (error, data) {
@@ -51,12 +51,35 @@ app.get('/alldata', function (req, res) {
 
 
 
-
 app.post('/filter', function (req, res) {
   var query = req.body.query;
   Review.find({}).exec(function (error, data) {
     var filteredData = data.filter(function (r) {
      return r.category === query;
+    })
+  res.send(filteredData);
+  })
+})
+
+
+
+app.post('/bybusiness', function (req, res) {
+  var query = req.body.query;
+  Review.find({}).exec(function (error, data) {
+    var filteredData = data.filter(function (r) {
+     return r.name.indexOf(query) != -1;
+    })
+  res.send(filteredData);
+  })
+})
+
+
+
+app.post('/bylocation', function (req, res) {
+  var query = req.body.query;
+  Review.find({}).exec(function (error, data) {
+    var filteredData = data.filter(function (r) {
+     return r.location.indexOf(query) != -1;
     })
   res.send(filteredData);
   })

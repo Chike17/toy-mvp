@@ -87,7 +87,6 @@
 	//     $('<li></li>').text(num).appendTo(ul);
 	// };
 	
-	console.log('*88***');
 	
 	var App = function (_React$Component) {
 	  _inherits(App, _React$Component);
@@ -121,11 +120,43 @@
 	    key: 'queryByName',
 	    value: function queryByName(e) {
 	      console.log(e.target.value);
+	      var context = this;
+	      _jquery2.default.ajax({
+	        type: "POST",
+	        data: { 'query': e.target.value },
+	        url: 'http://localhost:3000/bybusiness',
+	        dataType: 'json',
+	        success: function success(data) {
+	          console.log('success');
+	          console.log(data);
+	          context.setState({ reviews: data });
+	        },
+	        error: function error(_error2) {
+	          console.log('you have an error');
+	          console.log(_error2);
+	        }
+	      });
 	    }
 	  }, {
 	    key: 'queryByLocation',
 	    value: function queryByLocation(e) {
 	      console.log(e.target.value);
+	      var context = this;
+	      _jquery2.default.ajax({
+	        type: "POST",
+	        data: { 'query': e.target.value },
+	        url: 'http://localhost:3000/bylocation',
+	        dataType: 'json',
+	        success: function success(data) {
+	          console.log('success');
+	          console.log(data);
+	          context.setState({ reviews: data });
+	        },
+	        error: function error(_error3) {
+	          console.log('you have an error');
+	          console.log(_error3);
+	        }
+	      });
 	    }
 	  }, {
 	    key: 'filterCategory',
@@ -142,9 +173,9 @@
 	          console.log(data);
 	          context.setState({ reviews: data });
 	        },
-	        error: function error(_error2) {
+	        error: function error(_error4) {
 	          console.log('you have an error');
-	          console.log(_error2);
+	          console.log(_error4);
 	        }
 	      });
 	    }
@@ -180,7 +211,7 @@
 	          null,
 	          ' - '
 	        ),
-	        _react2.default.createElement(_Review2.default, { reviews: this.state.reviews, inputBusiness: this.queryByName, inputLocation: this.queryByLocation })
+	        _react2.default.createElement(_Review2.default, { reviews: this.state.reviews, inputBusiness: this.queryByName.bind(this), inputLocation: this.queryByLocation.bind(this) })
 	      );
 	    }
 	  }]);

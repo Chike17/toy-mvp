@@ -4,6 +4,7 @@
  import React from 'react'
  import ReactDom from 'react-dom'
  import Review from './Review.js'
+ 
 
  // $('<h1>Numbers</h1>').appendTo('body');
  // const ul = $('<ul></ul>').appendTo('body');
@@ -11,7 +12,6 @@
  //     $('<li></li>').text(num).appendTo(ul);
  // };
 
-console.log('*88***')
 
 class App extends React.Component {
   constructor(props) {
@@ -37,11 +37,44 @@ class App extends React.Component {
 
 queryByName (e) {
   console.log(e.target.value);
+  var context = this;
+  $.ajax({
+    type: "POST",
+    data: {'query': e.target.value} ,
+    url: 'http://localhost:3000/bybusiness',
+    dataType: 'json',
+    success: function (data) {
+      console.log('success')
+      console.log(data)
+      context.setState({reviews:data})
+    },
+    error: function (error) {
+      console.log('you have an error')
+      console.log(error)
+    }
+  });
+
 }
 
 
 queryByLocation (e) {
   console.log(e.target.value);
+  var context = this;
+  $.ajax({
+    type: "POST",
+    data: {'query': e.target.value} ,
+    url: 'http://localhost:3000/bylocation',
+    dataType: 'json',
+    success: function (data) {
+      console.log('success')
+      console.log(data)
+      context.setState({reviews:data})
+    },
+    error: function (error) {
+      console.log('you have an error')
+      console.log(error)
+    }
+  });
 }
 
 filterCategory (value) {
@@ -74,7 +107,7 @@ var context = this;
      <span   id = "Massage Parlors" onClick = {function () {this.filterCategory(document.getElementById('Massage Parlors'))}.bind(this) }> Massage Parlors    </span> 
      <div> - </div>
      
-      <Review reviews = {this.state.reviews} inputBusiness = {this.queryByName} inputLocation = {this.queryByLocation}/>
+      <Review reviews = {this.state.reviews} inputBusiness = {this.queryByName.bind(this)} inputLocation = {this.queryByLocation.bind(this)}/>
      
     </div>
    )
