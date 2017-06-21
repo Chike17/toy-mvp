@@ -41,14 +41,14 @@ var sillyBarberShopReview = new Review({
   'location': 'San Francisco', 
   'category': 'BarberShops'});
 
-sillyBarberShopeReview.save();
+sillyBarberShopReview.save();
 
 
 var locations = ['Chicago', 'San Francisco', 'Boston'];
 
 var reviewNumber = 1;
 
-// insert multiple stock reviews in multiple locations
+// insert multiple stock reviews in random locations with random ratings
 
 var insertStockReviews = function () {
   for (var i = 0; i < stockData.length; i++) {
@@ -56,24 +56,18 @@ var insertStockReviews = function () {
     var location = locations[randomIndex];
     var randomRating = Math.floor(Math.random() * 6);
     var rvw = new Review({
-      'name': allData[i].name + ' ' + reviewNumber, 
-      'review': allData[i].review + ' ' + reviewNumber, 
+      'name': stockData[i].name + ' ' + reviewNumber, 
+      'review': stockData[i].review + ' ' + reviewNumber, 
       'rating': randomRating, 
       'location': location, 
-      'category': allData[i].category});
+      'category': stockData[i].category});
     rvw.save();
     reviewNumber++;
     console.log(reviewNumber);
   }
 };
 
-for (var i = 0; i < 5; i++) {
+for (var i = 0; i < 20; i++) {
   insertStockReviews();
-}  
-
-// push committed changes up
-// figure out merge conflict situation if there is one
-// check if current changes work
-// add insert command to readme file
-// figure out how to approach the sudo service mongod start command
+}
 
