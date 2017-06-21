@@ -1,7 +1,7 @@
-import React from 'react'
-import Reviews from './Reviews.js'
+import React from 'react';
+import Reviews from './Reviews.js';
 //should call this component input
-var Review = ({inputBusiness,inputLocation, reviews}) => {
+var Review = ({inputBusiness, inputLocation, reviews}) => {
  return (
    <div>
    <form >
@@ -18,9 +18,9 @@ var Review = ({inputBusiness,inputLocation, reviews}) => {
         <div> - </div>
     </form>
 
-    <Reviews eachReview =  {reviews}/> 
+    <Reviews eachReview = {reviews}/> 
    </div>
- 	)
-}
+ );
+};
 
 module.exports = Review;

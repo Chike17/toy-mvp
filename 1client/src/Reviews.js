@@ -1,15 +1,14 @@
-import React from 'react'
+import React from 'react';
 
 var Reviews = (props) => {
- return (
-   <div>
+  return (
+    <div>
 
       {props.eachReview.map((review) => 
          
-      	<div >
+       <div >
 
-          
-		  	<div>
+          <div>
 		  	Name: {review.name}
 		  	</div>
 
@@ -33,27 +32,17 @@ var Reviews = (props) => {
 
 		  	</div>
 
-
-
 		  	<div>
               -
 
 		  	</div>
 
-
-      	</div>
+       </div>
       )}
 
    </div>
 
-
-
-
-
-
-
-
- 	)
-}
+  );
+};
 
 module.exports = Reviews;
