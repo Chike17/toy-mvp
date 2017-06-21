@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "ww": "webpack -d --watch",
-    "start": "npm run ww | nodemon server.js"
+    "start": "npm run ww | node server.js",
+    "insert": "node inserdata.js"
   },
   "repository": {
     "type": "git",

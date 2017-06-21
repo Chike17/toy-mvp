@@ -1,5 +1,3 @@
-
-
 // var reviews =  [review, review, review, review, review, review, review,
 // 				review, review, review, review, review, review, review,
 // 				review, review, review, review, review, review, review,
@@ -29,24 +27,25 @@ var review = {'name': 'Neverland Nails', 'review': 'A Nail Salons review', 'rati
 
 
 
- var rvw = new Review({'name': review.name , 
-				 	'review': review.review, 
-				 	'rating': review.rating, 
-				 	'location': review.location, 
-				 	'category': review.category});
+var rvw = new Review({
+  'name': review.name, 
+  'review': review.review, 
+  'rating': review.rating, 
+  'location': review.location, 
+	'category': review.category});
 
 
 // rvw.save();
 
- Review.find({}).exec(function (error, data) {
-    console.log(data)
-  })
+Review.find({}).exec(function (error, data) {
+  console.log(data);
+});
 
 app.get('/alldata', function (req, res) {
   Review.find({}).exec(function (error, data) {
     // console.log(data, '?????');
-  res.send(data);
-  })
+    res.send(data);
+  });
 }); 
 
 
@@ -55,11 +54,11 @@ app.post('/filter', function (req, res) {
   var query = req.body.query;
   Review.find({}).exec(function (error, data) {
     var filteredData = data.filter(function (r) {
-     return r.category === query;
-    })
-  res.send(filteredData);
-  })
-})
+      return r.category === query;
+    });
+    res.send(filteredData);
+  });
+});
 
 
 
@@ -67,11 +66,11 @@ app.post('/bybusiness', function (req, res) {
   var query = req.body.query;
   Review.find({}).exec(function (error, data) {
     var filteredData = data.filter(function (r) {
-     return r.name.indexOf(query) != -1;
-    })
-  res.send(filteredData);
-  })
-})
+      return r.name.indexOf(query) != -1;
+    });
+    res.send(filteredData);
+  });
+});
 
 
 
@@ -79,13 +78,13 @@ app.post('/bylocation', function (req, res) {
   var query = req.body.query;
   Review.find({}).exec(function (error, data) {
     var filteredData = data.filter(function (r) {
-     return r.location.indexOf(query) != -1;
-    })
-  res.send(filteredData);
-  })
-})
+      return r.location.indexOf(query) != -1;
+    });
+    res.send(filteredData);
+  });
+});
 
 
 app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
-})
+  console.log('Example app listening on port 3000!');
+});
