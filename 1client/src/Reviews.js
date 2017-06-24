@@ -1,43 +1,29 @@
 import React from 'react';
+import styles from './styles.css';
 
 var Reviews = (props) => {
   return (
-    <div>
+    <div >
 
       {props.eachReview.map((review) => 
          
-       <div >
+          <p className = {styles.reviewEntry}>
 
-          <div>
-		  	Name: {review.name}
-		  	</div>
+		    <span>Name: {review.name} </span> 
+		  
 
-		  	<div>
-		  	Review: {review.review}
-		  	</div>
+		  	<span> Review: {review.review} </span>
+		  	
 
-		  	<div>
-		  	Rating: {review.rating}
-		  	</div>
-
-
-		  	<div>
-		  	Location: {review.location}
-
-		  	</div>
+		  	<span> Rating: {review.rating} </span>
+		 
+		  	
+		  	<span> Location: {review.location} </span>
 
 
-		  	<div>
-		  	 Category: {review.category}
+		  	<span> Category: {review.category} </span>
 
-		  	</div>
-
-		  	<div>
-              -
-
-		  	</div>
-
-       </div>
+		  </p>
       )}
 
    </div>

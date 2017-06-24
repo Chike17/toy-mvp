@@ -3,6 +3,7 @@
  import React from 'react';
  import ReactDom from 'react-dom';
  import Review from './Review.js';
+ import styles from './styles.css';
 
  class App extends React.Component {
    constructor(props) {
@@ -88,14 +89,14 @@
    render() {
      return (
         <div>
-
+        
+         <p className = {styles.categories}>
          <span id = "Barbershops" onClick = {function () { this.filterCategory(document.getElementById('Barbershops'))}.bind(this) }> Barbershops | </span>
          <span id = "Nail Salons" onClick = {function () { this.filterCategory(document.getElementById('Nail Salons'))}.bind(this) }> Nail Salons | </span>
          <span id = "Massage Parlors" onClick = {function () { this.filterCategory(document.getElementById('Massage Parlors'))}.bind(this) }> Massage Parlors </span> 
-         <div> - </div>
-         
-          <Review reviews = {this.state.reviews} inputBusiness = {this.queryByName.bind(this)} inputLocation = {this.queryByLocation.bind(this)}/>
-         
+         </p>
+
+         <Review reviews = {this.state.reviews} inputBusiness = {this.queryByName.bind(this)} inputLocation = {this.queryByLocation.bind(this)}/>
         </div>
      );
    }

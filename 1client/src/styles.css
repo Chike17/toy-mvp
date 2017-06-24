@@ -1,0 +1,20 @@
+.reviewEntry {
+ text-align: center;
+ margin-bottom: 10px;
+ margin-top: 10px;
+ margin-left: 10px;
+ margin-right: 10px ;
+ padding: 10px;
+ border: 2px;
+ border-radius: 25px;
+ background: #E2D8D4;
+ display: inline-block;
+}
+
+.inputs {
+ padding: 5px;
+}
+
+.categories {
+ padding: 5px;
+}

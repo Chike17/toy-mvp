@@ -1,26 +1,35 @@
 import React from 'react';
 import Reviews from './Reviews.js';
+import styles from './styles.css';
 //should call this component input
 var Review = ({inputBusiness, inputLocation, reviews}) => {
- return (
+  return (
+   <div >
    <div>
+
    <form >
+   <div className = {styles.inputs}>
         <label>
-          Business Name -:
+          Business Name :
           <input onChange = {inputBusiness} />
         </label>
+    </div>
+  </form>
 
-        <label>
-          Location -:
+  <form>
+    <div className = {styles.inputs} >
+        <label >
+          Location :
           <input onChange = {inputLocation} />
         </label>
+    </div>
 
-        <div> - </div>
     </form>
+    </div>
 
-    <Reviews eachReview = {reviews}/> 
+    <Reviews eachReview = {reviews} /> 
    </div>
- );
+  );
 };
 
 module.exports = Review;
