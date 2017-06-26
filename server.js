@@ -62,6 +62,29 @@ app.post('/bylocation', function (req, res) {
   });
 });
 
+app.get('/getspecbiz', function (req, res) {
+  var location = req.body.location;
+  var name = req.body.name;
+  Review.find({}).exec(function (err, data) {
+    if (!location && name) {
+      var filteredData = data.filter(function (r) {
+        return r.location.indexOf(name) != -1;
+      });
+      res.send(filteredData);
+    } else if (!name && location) {
+      var filteredData = data.filter(function (r) {
+        return r.location.indexOf(location) != -1;
+      });
+      res.send(filtereData);
+    } else {
+      var filteredData = data.filter(function (r) {
+        return r.location.indexOf(location) != -1 && r.location.indexOf(name) != -1;
+      });
+      res.send(filteredData);
+    }
+  });
+});
+
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');

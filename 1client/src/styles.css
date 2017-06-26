@@ -1,20 +1,54 @@
-.reviewEntry {
- text-align: center;
- margin-bottom: 10px;
- margin-top: 10px;
- margin-left: 10px;
- margin-right: 10px ;
- padding: 10px;
- border: 2px;
- border-radius: 25px;
- background: #E2D8D4;
- display: inline-block;
+.reviewContainer {
+ padding: 20px;
+ width: 300px;
+ height: 1000px;
+ margin-left: 400px;
 }
 
-.inputs {
- padding: 5px;
+
+.reviewEntry {
+  text-align: center;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  padding: 10px;
+  border: 2px;
+  border-bottom: solid grey;
+  border-radius: 25px;
+  background: #E2D8D4;
+  display: inline-block;
+  width: 400px;
+  word-wrap: break-word;
+}
+
+
+.bizinput {
+ padding: 20px;
+ 
+}
+
+.locinput {
+ padding: 20px;
+ margin-left: 45px;
+}
+
+.catcontainer {
+   padding: 20px;
+   width: 300px;
+   margin-left: 400px;
+   text-align: center;
 }
 
 .categories {
- padding: 5px;
+  width: 400px;
+  border: 2px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.catpick {
+  cursor: pointer;
+}
+
+.submit {
+  margin-left: 235px;
 }

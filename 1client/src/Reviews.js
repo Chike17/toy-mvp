@@ -3,27 +3,27 @@ import styles from './styles.css';
 
 var Reviews = (props) => {
   return (
-    <div >
+    <div className = {styles.reviewContainer} >
 
       {props.eachReview.map((review) => 
-         
-          <p className = {styles.reviewEntry}>
+      <div className = {styles.reviewEntry}>
 
-		    <span>Name: {review.name} </span> 
-		  
+      	 <div >Name: {review.name} </div> 
+      	 	
 
-		  	<span> Review: {review.review} </span>
-		  	
-
-		  	<span> Rating: {review.rating} </span>
-		 
-		  	
-		  	<span> Location: {review.location} </span>
+      	 <div> Rating: {review.rating} </div>
+      	 
+      	 	
+      	 <div> Location: {review.location} </div>
 
 
-		  	<span> Category: {review.category} </span>
+      	 <div> Category: {review.category} </div>
 
-		  </p>
+
+      	 <div> Review: {review.review} </div>
+
+
+       </div>
       )}
 
    </div>

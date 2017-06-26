@@ -92,7 +92,12 @@
 	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 	
 	    _this.state = {
-	      reviews: _init2.default
+	      reviews: _init2.default,
+	      category: 'All Categories',
+	      location: 'All Locations',
+	      queryLocation: '',
+	      queryName: '',
+	      name: ''
 	    };
 	    var context = _this;
 	    _jquery2.default.ajax({
@@ -115,8 +120,9 @@
 	    value: function queryByName(e) {
 	      console.log(e.target.value);
 	      var context = this;
+	      context.setState({ queryName: e.target.value });
 	      _jquery2.default.ajax({
-	        type: "POST",
+	        type: 'POST',
 	        data: { 'query': e.target.value },
 	        url: 'http://localhost:3000/bybusiness',
 	        dataType: 'json',
@@ -124,6 +130,8 @@
 	          console.log('success');
 	          console.log(data);
 	          context.setState({ reviews: data });
+	          context.setState({ location: data[0].location });
+	          context.setState({ category: data[0].category });
 	        },
 	        error: function error(_error2) {
 	          console.log('you have an error');
@@ -136,6 +144,7 @@
 	    value: function queryByLocation(e) {
 	      console.log(e.target.value);
 	      var context = this;
+	      context.setState({ queryLocation: e.target.value });
 	      _jquery2.default.ajax({
 	        type: 'POST',
 	        data: { 'query': e.target.value },
@@ -156,22 +165,52 @@
 	    key: 'filterCategory',
 	    value: function filterCategory(value) {
 	      var context = this;
-	      console.log({ 'query': value.id });
+	      console.log({ 'query': value });
 	      _jquery2.default.ajax({
 	        type: 'POST',
-	        data: { 'query': value.id },
+	        data: { 'query': value },
 	        url: 'http://localhost:3000/filter',
 	        dataType: 'json',
 	        success: function success(data) {
 	          console.log('success');
 	          console.log(data);
 	          context.setState({ reviews: data });
+	          context.setState({ location: 'All Locations' });
 	        },
 	        error: function error(_error4) {
 	          console.log('you have an error');
 	          console.log(_error4);
 	        }
 	      });
+	      context.setState({ category: value });
+	    }
+	  }, {
+	    key: 'getSpecBiz',
+	    value: function getSpecBiz(e) {
+	      e.preventDefault();
+	      // var context = this;
+	      // $.ajax({
+	      //   type: 'POST',
+	      //   data: {'query': e.target.value},
+	      //   url: 'http://localhost:3000/bylocation',
+	      //   dataType: 'json',
+	      //   success: function (data) {
+	      //     console.log('success');
+	      //     console.log(data);
+	      //     context.setState({reviews: data});
+	      //   },
+	      //   error: function (error) {
+	      //     console.log('you have an error');
+	      //     console.log(error);
+	      //   }
+	      // });
+	    }
+	  }, {
+	    key: 'handleBizLoc',
+	    value: function handleBizLoc(e) {
+	      e.preventDefault();
+	      console.log(this.state.queryLocation);
+	      console.log(this.state.queryName);
 	    }
 	  }, {
 	    key: 'render',
@@ -181,30 +220,30 @@
 	        null,
 	        _react2.default.createElement(
 	          'p',
-	          { className: _styles2.default.categories },
+	          { className: _styles2.default },
 	          _react2.default.createElement(
 	            'span',
-	            { id: 'Barbershops', onClick: function () {
-	                this.filterCategory(document.getElementById('Barbershops'));
+	            { className: _styles2.default.catpick, onClick: function () {
+	                this.filterCategory('Barbershops');
 	              }.bind(this) },
 	            ' Barbershops | '
 	          ),
 	          _react2.default.createElement(
 	            'span',
-	            { id: 'Nail Salons', onClick: function () {
-	                this.filterCategory(document.getElementById('Nail Salons'));
+	            { className: _styles2.default.catpick, onClick: function () {
+	                this.filterCategory('Nail Salons');
 	              }.bind(this) },
 	            ' Nail Salons | '
 	          ),
 	          _react2.default.createElement(
 	            'span',
-	            { id: 'Massage Parlors', onClick: function () {
-	                this.filterCategory(document.getElementById('Massage Parlors'));
+	            { className: _styles2.default.catpick, onClick: function () {
+	                this.filterCategory('Massage Parlors');
 	              }.bind(this) },
 	            ' Massage Parlors '
 	          )
 	        ),
-	        _react2.default.createElement(_Review2.default, { reviews: this.state.reviews, inputBusiness: this.queryByName.bind(this), inputLocation: this.queryByLocation.bind(this) })
+	        _react2.default.createElement(_Review2.default, { reviews: this.state.reviews, category: this.state.category, location: this.state.location, inputBusiness: this.queryByName.bind(this), inputLocation: this.queryByLocation.bind(this), getSpecBiz: this.getSpecBiz.bind(this), getBizLoc: this.handleBizLoc.bind(this) })
 	      );
 	    }
 	  }]);
@@ -33198,9 +33237,13 @@
 	
 	//should call this component input
 	var Review = function Review(_ref) {
-	  var inputBusiness = _ref.inputBusiness,
+	  var category = _ref.category,
+	      location = _ref.location,
+	      inputBusiness = _ref.inputBusiness,
 	      inputLocation = _ref.inputLocation,
-	      reviews = _ref.reviews;
+	      reviews = _ref.reviews,
+	      getSpecBiz = _ref.getSpecBiz,
+	      getBizLoc = _ref.getBizLoc;
 	
 	  return _react2.default.createElement(
 	    'div',
@@ -33210,31 +33253,41 @@
 	      null,
 	      _react2.default.createElement(
 	        'form',
-	        null,
+	        { onSubmit: getBizLoc },
 	        _react2.default.createElement(
 	          'div',
-	          { className: _styles2.default.inputs },
+	          { className: _styles2.default.bizinput },
 	          _react2.default.createElement(
 	            'label',
 	            null,
 	            'Business Name :',
 	            _react2.default.createElement('input', { onChange: inputBusiness })
 	          )
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'form',
-	        null,
+	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: _styles2.default.inputs },
+	          { className: _styles2.default.locinput },
 	          _react2.default.createElement(
 	            'label',
 	            null,
 	            'Location :',
 	            _react2.default.createElement('input', { onChange: inputLocation })
 	          )
-	        )
+	        ),
+	        _react2.default.createElement('input', { type: 'submit', value: 'Submit', className: _styles2.default.submit })
+	      )
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: _styles2.default.catcontainer },
+	      _react2.default.createElement(
+	        'div',
+	        { className: _styles2.default.categories },
+	        ' ',
+	        category,
+	        ' | ',
+	        location,
+	        ' '
 	      )
 	    ),
 	    _react2.default.createElement(_Reviews2.default, { eachReview: reviews })
@@ -33263,51 +33316,51 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Reviews = function Reviews(props) {
-			return _react2.default.createElement(
-					'div',
-					null,
-					props.eachReview.map(function (review) {
-							return _react2.default.createElement(
-									'p',
-									{ className: _styles2.default.reviewEntry },
-									_react2.default.createElement(
-											'span',
-											null,
-											'Name: ',
-											review.name,
-											' '
-									),
-									_react2.default.createElement(
-											'span',
-											null,
-											' Review: ',
-											review.review,
-											' '
-									),
-									_react2.default.createElement(
-											'span',
-											null,
-											' Rating: ',
-											review.rating,
-											' '
-									),
-									_react2.default.createElement(
-											'span',
-											null,
-											' Location: ',
-											review.location,
-											' '
-									),
-									_react2.default.createElement(
-											'span',
-											null,
-											' Category: ',
-											review.category,
-											' '
-									)
-							);
-					})
-			);
+	  return _react2.default.createElement(
+	    'div',
+	    { className: _styles2.default.reviewContainer },
+	    props.eachReview.map(function (review) {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: _styles2.default.reviewEntry },
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          'Name: ',
+	          review.name,
+	          ' '
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          ' Rating: ',
+	          review.rating,
+	          ' '
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          ' Location: ',
+	          review.location,
+	          ' '
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          ' Category: ',
+	          review.category,
+	          ' '
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          ' Review: ',
+	          review.review,
+	          ' '
+	        )
+	      );
+	    })
+	  );
 	};
 	
 	module.exports = Reviews;
@@ -33358,13 +33411,18 @@
 	
 	
 	// module
-	exports.push([module.id, ".styles__reviewEntry___3jrzN {\n text-align: center;\n margin-bottom: 10px;\n margin-top: 10px;\n margin-left: 10px;\n margin-right: 10px ;\n padding: 10px;\n border: 2px;\n border-radius: 25px;\n background: #E2D8D4;\n display: inline-block;\n}\n\n.styles__inputs___3vmlB {\n padding: 5px;\n}\n\n.styles__categories___3ZKx2 {\n padding: 5px;\n}", ""]);
+	exports.push([module.id, ".styles__reviewContainer___e4XtJ {\n padding: 20px;\n width: 300px;\n height: 1000px;\n margin-left: 400px;\n}\n\n\n.styles__reviewEntry___3jrzN {\n  text-align: center;\n  margin-bottom: 10px;\n  margin-left: 10px;\n  padding: 10px;\n  border: 2px;\n  border-bottom: solid grey;\n  border-radius: 25px;\n  background: #E2D8D4;\n  display: inline-block;\n  width: 400px;\n  word-wrap: break-word;\n}\n\n\n.styles__bizinput___CMJXA {\n padding: 20px;\n \n}\n\n.styles__locinput___3Cz8w {\n padding: 20px;\n margin-left: 45px;\n}\n\n.styles__catcontainer___2JQ92 {\n   padding: 20px;\n   width: 300px;\n   margin-left: 400px;\n   text-align: center;\n}\n\n.styles__categories___3ZKx2 {\n  width: 400px;\n  border: 2px;\n  margin-bottom: 10px;\n  margin-left: 10px;\n}\n\n.styles__catpick___2R-sv {\n  cursor: pointer;\n}\n\n.styles__submit___2BcZC {\n  margin-left: 235px;\n}\n", ""]);
 	
 	// exports
 	exports.locals = {
+		"reviewContainer": "styles__reviewContainer___e4XtJ",
 		"reviewEntry": "styles__reviewEntry___3jrzN",
-		"inputs": "styles__inputs___3vmlB",
-		"categories": "styles__categories___3ZKx2"
+		"bizinput": "styles__bizinput___CMJXA",
+		"locinput": "styles__locinput___3Cz8w",
+		"catcontainer": "styles__catcontainer___2JQ92",
+		"categories": "styles__categories___3ZKx2",
+		"catpick": "styles__catpick___2R-sv",
+		"submit": "styles__submit___2BcZC"
 	};
 
 /***/ }),
