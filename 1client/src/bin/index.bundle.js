@@ -155,6 +155,27 @@
 	      context.setState({ category: value });
 	    }
 	  }, {
+	    key: 'fetchAllReviews',
+	    value: function fetchAllReviews() {
+	      var context = this;
+	      _jquery2.default.ajax({
+	        type: 'GET',
+	        url: 'http://localhost:3000/alldata',
+	        dataType: 'json',
+	        success: function success(data) {
+	          console.log('success');
+	          console.log(data);
+	          context.setState({ reviews: data,
+	            location: 'All Locations',
+	            category: 'All Categories' });
+	        },
+	        error: function error(_error3) {
+	          console.log('you have an error');
+	          console.log(_error3);
+	        }
+	      });
+	    }
+	  }, {
 	    key: 'handleBizLoc',
 	    value: function handleBizLoc(e) {
 	      e.preventDefault();
@@ -185,18 +206,27 @@
 	            context.setState({ reviews: data });
 	          }
 	        },
-	        error: function error(_error3) {
+	        error: function error(_error4) {
 	          console.log('you have an error');
-	          console.log(_error3);
+	          console.log(_error4);
 	        }
 	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+	
 	      return _react2.default.createElement(
 	        'div',
 	        null,
+	        _react2.default.createElement(
+	          'div',
+	          { onClick: function onClick() {
+	              _this2.fetchAllReviews();
+	            }, className: _styles2.default.headerstyles, id: 'logo' },
+	          ' Take Care '
+	        ),
 	        _react2.default.createElement(
 	          'p',
 	          { className: _styles2.default },
@@ -33390,7 +33420,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".styles__reviewContainer___e4XtJ {\n padding: 20px;\n width: 300px;\n height: 1000px;\n margin-left: 400px;\n}\n\n\n.styles__reviewEntry___3jrzN {\n  text-align: center;\n  margin-bottom: 10px;\n  margin-left: 10px;\n  padding: 10px;\n  border: 2px;\n  border-radius: 25px;\n  background: #E2D8D4;\n  display: inline-block;\n  width: 400px;\n  word-wrap: break-word;\n}\n\n\n.styles__bizinput___CMJXA {\n padding: 20px;\n \n}\n\n.styles__locinput___3Cz8w {\n padding: 20px;\n margin-left: 45px;\n}\n\n.styles__catcontainer___2JQ92 {\n   padding: 20px;\n   width: 300px;\n   margin-left: 400px;\n   text-align: center;\n}\n\n.styles__categories___3ZKx2 {\n  width: 400px;\n  border: 2px;\n  margin-bottom: 10px;\n  margin-left: 10px;\n}\n\n.styles__catpick___2R-sv {\n  cursor: pointer;\n}\n\n.styles__submit___2BcZC {\n  margin-left: 235px;\n}\n", ""]);
+	exports.push([module.id, ".styles__reviewContainer___e4XtJ {\n padding: 20px;\n width: 300px;\n height: 1000px;\n margin-left: 400px;\n}\n\n\n.styles__reviewEntry___3jrzN {\n  text-align: center;\n  margin-bottom: 10px;\n  margin-left: 10px;\n  padding: 10px;\n  border: 2px;\n  border-radius: 25px;\n  background: #E2D8D4;\n  display: inline-block;\n  width: 400px;\n  word-wrap: break-word;\n}\n\n\n.styles__bizinput___CMJXA {\n padding: 20px;\n \n}\n\n.styles__locinput___3Cz8w {\n padding: 20px;\n margin-left: 45px;\n}\n\n.styles__catcontainer___2JQ92 {\n   padding: 20px;\n   width: 300px;\n   margin-left: 400px;\n   text-align: center;\n}\n\n.styles__categories___3ZKx2 {\n  width: 400px;\n  border: 2px;\n  margin-bottom: 10px;\n  margin-left: 10px;\n}\n\n.styles__catpick___2R-sv {\n  cursor: pointer;\n}\n\n.styles__submit___2BcZC {\n  margin-left: 235px;\n}\n\n.styles__headerstyles___1Ot2C {\n  padding: 20px;\n  margin-left:  -18px;\n  cursor: pointer;\n}\n", ""]);
 	
 	// exports
 	exports.locals = {
@@ -33401,7 +33431,8 @@
 		"catcontainer": "styles__catcontainer___2JQ92",
 		"categories": "styles__categories___3ZKx2",
 		"catpick": "styles__catpick___2R-sv",
-		"submit": "styles__submit___2BcZC"
+		"submit": "styles__submit___2BcZC",
+		"headerstyles": "styles__headerstyles___1Ot2C"
 	};
 
 /***/ }),

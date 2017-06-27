@@ -64,6 +64,25 @@
      });
      context.setState({category: value});
    }
+   fetchAllReviews () {
+     var context = this;
+     $.ajax({
+       type: 'GET',
+       url: 'http://localhost:3000/alldata',
+       dataType: 'json',
+       success: function (data) {
+         console.log('success');
+         console.log(data);
+         context.setState({reviews: data, 
+                          location: 'All Locations', 
+                          category: 'All Categories'});
+       },
+       error: function (error) {
+         console.log('you have an error');
+         console.log(error);
+       }
+     });
+   }
    handleBizLoc (e) {
      e.preventDefault();
      console.log(this.state.queryName);
@@ -76,7 +95,7 @@
        url: 'http://localhost:3000/getspecbiz',
        dataType: 'json',
        success: function (data) {
-        console.log(data.length);
+         console.log(data.length);
          if (data.length === 0 ) {
            context.setState({reviews: [{name: 'NOT FOUND '}], location: 'NOT FOUND ', category: 'NOT FOUND'});
          } else {
@@ -104,7 +123,8 @@
    render() {
      return (
         <div>
-        
+        <div onClick = { () => { this.fetchAllReviews(); } } className = {styles.headerstyles} id="logo"> Take Care </div>
+
          <p className = {styles}>
          <span className = {styles.catpick} onClick = {function () { this.filterCategory('Barbershops'); }.bind(this) }> Barbershops | </span>
          <span className = {styles.catpick} onClick = {function () { this.filterCategory('Nail Salons'); }.bind(this) }> Nail Salons | </span>
