@@ -118,77 +118,34 @@
 	  _createClass(App, [{
 	    key: 'queryByName',
 	    value: function queryByName(e) {
-	      console.log(e.target.value);
 	      var context = this;
 	      context.setState({ queryName: e.target.value });
-	      _jquery2.default.ajax({
-	        type: 'POST',
-	        data: { 'query': e.target.value },
-	        url: 'http://localhost:3000/bybusiness',
-	        dataType: 'json',
-	        success: function success(data) {
-	          console.log('success');
-	          console.log(data);
-	          context.setState({ reviews: data });
-	          context.setState({ location: data[0].location });
-	          context.setState({ category: data[0].category });
-	        },
-	        error: function error(_error2) {
-	          console.log('you have an error');
-	          console.log(_error2);
-	        }
-	      });
+	      // console.log(e.target.value);
+	      // $.ajax({
+	      //   type: 'POST',
+	      //   data: {'query': e.target.value},
+	      //   url: 'http://localhost:3000/bybusiness',
+	      //   dataType: 'json',
+	      //   success: function (data) {
+	      //     console.log('success');
+	      //     console.log(data);
+	      //     context.setState({reviews: data});
+	      //     context.setState({location: data[0].location});
+	      //     context.setState({category: data[0].category});
+	
+	      //   },
+	      //   error: function (error) {
+	      //     console.log('you have an error');
+	      //     console.log(error);
+	      //   }
+	      // });
 	    }
 	  }, {
 	    key: 'queryByLocation',
 	    value: function queryByLocation(e) {
-	      console.log(e.target.value);
 	      var context = this;
 	      context.setState({ queryLocation: e.target.value });
-	      _jquery2.default.ajax({
-	        type: 'POST',
-	        data: { 'query': e.target.value },
-	        url: 'http://localhost:3000/bylocation',
-	        dataType: 'json',
-	        success: function success(data) {
-	          console.log('success');
-	          console.log(data);
-	          context.setState({ reviews: data });
-	        },
-	        error: function error(_error3) {
-	          console.log('you have an error');
-	          console.log(_error3);
-	        }
-	      });
-	    }
-	  }, {
-	    key: 'filterCategory',
-	    value: function filterCategory(value) {
-	      var context = this;
-	      console.log({ 'query': value });
-	      _jquery2.default.ajax({
-	        type: 'POST',
-	        data: { 'query': value },
-	        url: 'http://localhost:3000/filter',
-	        dataType: 'json',
-	        success: function success(data) {
-	          console.log('success');
-	          console.log(data);
-	          context.setState({ reviews: data });
-	          context.setState({ location: 'All Locations' });
-	        },
-	        error: function error(_error4) {
-	          console.log('you have an error');
-	          console.log(_error4);
-	        }
-	      });
-	      context.setState({ category: value });
-	    }
-	  }, {
-	    key: 'getSpecBiz',
-	    value: function getSpecBiz(e) {
-	      e.preventDefault();
-	      // var context = this;
+	      // console.log(e.target.value);
 	      // $.ajax({
 	      //   type: 'POST',
 	      //   data: {'query': e.target.value},
@@ -206,11 +163,60 @@
 	      // });
 	    }
 	  }, {
+	    key: 'filterCategory',
+	    value: function filterCategory(value) {
+	      var context = this;
+	      console.log({ 'query': value });
+	      _jquery2.default.ajax({
+	        type: 'POST',
+	        data: { 'query': value },
+	        url: 'http://localhost:3000/filter',
+	        dataType: 'json',
+	        success: function success(data) {
+	          console.log('success');
+	          console.log(data);
+	          context.setState({ reviews: data });
+	          context.setState({ location: 'All Locations' });
+	        },
+	        error: function error(_error2) {
+	          console.log('you have an error');
+	          console.log(_error2);
+	        }
+	      });
+	      context.setState({ category: value });
+	    }
+	  }, {
 	    key: 'handleBizLoc',
 	    value: function handleBizLoc(e) {
 	      e.preventDefault();
-	      console.log(this.state.queryLocation);
 	      console.log(this.state.queryName);
+	      console.log(this.state.queryLocation);
+	      var context = this;
+	      _jquery2.default.ajax({
+	        type: 'POST',
+	        data: { 'submit': { name: context.state.queryName, location: context.state.queryLocation } },
+	        url: 'http://localhost:3000/getspecbiz',
+	        dataType: 'json',
+	        success: function success(data) {
+	          context.setState({ location: data[0].location }, function () {
+	            var locStatus = data.reduce(function (acc, review, index, array) {
+	              if (acc === false) {
+	                context.setState({ location: 'Multiple Locations' });
+	              }
+	              console.log(acc);
+	              if (index + 1 !== array.length) {
+	                return acc && array[index].location === array[index + 1].location;
+	              }
+	            }, true);
+	          });
+	
+	          context.setState({ reviews: data });
+	        },
+	        error: function error(_error3) {
+	          console.log('you have an error');
+	          console.log(_error3);
+	        }
+	      });
 	    }
 	  }, {
 	    key: 'render',
@@ -243,7 +249,7 @@
 	            ' Massage Parlors '
 	          )
 	        ),
-	        _react2.default.createElement(_Review2.default, { reviews: this.state.reviews, category: this.state.category, location: this.state.location, inputBusiness: this.queryByName.bind(this), inputLocation: this.queryByLocation.bind(this), getSpecBiz: this.getSpecBiz.bind(this), getBizLoc: this.handleBizLoc.bind(this) })
+	        _react2.default.createElement(_Review2.default, { reviews: this.state.reviews, category: this.state.category, location: this.state.location, inputBusiness: this.queryByName.bind(this), inputLocation: this.queryByLocation.bind(this), getBizLoc: this.handleBizLoc.bind(this) })
 	      );
 	    }
 	  }]);
@@ -33411,7 +33417,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".styles__reviewContainer___e4XtJ {\n padding: 20px;\n width: 300px;\n height: 1000px;\n margin-left: 400px;\n}\n\n\n.styles__reviewEntry___3jrzN {\n  text-align: center;\n  margin-bottom: 10px;\n  margin-left: 10px;\n  padding: 10px;\n  border: 2px;\n  border-bottom: solid grey;\n  border-radius: 25px;\n  background: #E2D8D4;\n  display: inline-block;\n  width: 400px;\n  word-wrap: break-word;\n}\n\n\n.styles__bizinput___CMJXA {\n padding: 20px;\n \n}\n\n.styles__locinput___3Cz8w {\n padding: 20px;\n margin-left: 45px;\n}\n\n.styles__catcontainer___2JQ92 {\n   padding: 20px;\n   width: 300px;\n   margin-left: 400px;\n   text-align: center;\n}\n\n.styles__categories___3ZKx2 {\n  width: 400px;\n  border: 2px;\n  margin-bottom: 10px;\n  margin-left: 10px;\n}\n\n.styles__catpick___2R-sv {\n  cursor: pointer;\n}\n\n.styles__submit___2BcZC {\n  margin-left: 235px;\n}\n", ""]);
+	exports.push([module.id, ".styles__reviewContainer___e4XtJ {\n padding: 20px;\n width: 300px;\n height: 1000px;\n margin-left: 400px;\n}\n\n\n.styles__reviewEntry___3jrzN {\n  text-align: center;\n  margin-bottom: 10px;\n  margin-left: 10px;\n  padding: 10px;\n  border: 2px;\n  border-radius: 25px;\n  background: #E2D8D4;\n  display: inline-block;\n  width: 400px;\n  word-wrap: break-word;\n}\n\n\n.styles__bizinput___CMJXA {\n padding: 20px;\n \n}\n\n.styles__locinput___3Cz8w {\n padding: 20px;\n margin-left: 45px;\n}\n\n.styles__catcontainer___2JQ92 {\n   padding: 20px;\n   width: 300px;\n   margin-left: 400px;\n   text-align: center;\n}\n\n.styles__categories___3ZKx2 {\n  width: 400px;\n  border: 2px;\n  margin-bottom: 10px;\n  margin-left: 10px;\n}\n\n.styles__catpick___2R-sv {\n  cursor: pointer;\n}\n\n.styles__submit___2BcZC {\n  margin-left: 235px;\n}\n", ""]);
 	
 	// exports
 	exports.locals = {

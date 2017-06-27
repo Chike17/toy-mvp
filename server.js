@@ -16,7 +16,7 @@ app.use(express.static(__dirname));
 
 
 Review.find({}).exec(function (error, data) {
-  console.log(data);
+  // console.log(data);
 });
 
 app.get('/alldata', function (req, res) {
@@ -62,29 +62,38 @@ app.post('/bylocation', function (req, res) {
   });
 });
 
-app.get('/getspecbiz', function (req, res) {
-  var location = req.body.location;
-  var name = req.body.name;
+app.post('/getspecbiz', function (req, res) {
+  // console.log(req.body, 'req.body');
+  var location = req.body.submit.location;
+  location = location.toLowerCase();
+  var name = req.body.submit.name;
+  name = name.toLowerCase();
   Review.find({}).exec(function (err, data) {
-    if (!location && name) {
+    if (location === '' && name === '') {
+      res.send([{name: 'INVALID QUERY'}]);
+    } else if (location === '' && name) {
       var filteredData = data.filter(function (r) {
-        return r.location.indexOf(name) != -1;
+        var nameCopy = r.name.toLowerCase();
+        return nameCopy.indexOf(name) != -1;
       });
       res.send(filteredData);
-    } else if (!name && location) {
+    } else if (name === '' && location) {
       var filteredData = data.filter(function (r) {
-        return r.location.indexOf(location) != -1;
+        var locCopy = r.location.toLowerCase();
+        return locCopy.indexOf(location) != -1;
       });
-      res.send(filtereData);
+      res.send(filteredData);
     } else {
       var filteredData = data.filter(function (r) {
-        return r.location.indexOf(location) != -1 && r.location.indexOf(name) != -1;
+        var nameCopy = r.name.toLowerCase();
+        var locCopy = r.location.toLowerCase();
+        return nameCopy.indexOf(name) != -1 && locCopy.indexOf(location) != -1;
       });
+      console.log(filteredData);
       res.send(filteredData);
     }
   });
 });
-
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "ww": "webpack -d --watch",
-    "start": "npm run ww | node server.js",
+    "start": "npm run ww | nodemon server.js",
     "insert": "sudo service mongod start | node insertdata.js"
   },
   "repository": {
