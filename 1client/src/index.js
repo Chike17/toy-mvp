@@ -16,6 +16,8 @@
        queryName: '',
        name: ''
      };
+   }
+   componentDidMount() {
      var context = this;
      $.ajax({
        type: 'GET',
@@ -74,19 +76,23 @@
        url: 'http://localhost:3000/getspecbiz',
        dataType: 'json',
        success: function (data) {
-         context.setState({location: data[0].location}, function () {
-           data.reduce(function (acc, review, index, array) {
-             if (acc === false) {
-               context.setState({location: 'Multiple Locations', category: 'All Categories' });
-             }
-             console.log(acc);
-             if (index + 1 !== array.length) {
-               return acc && array[index].location === array[index + 1].location;
-             }
-           }, true);
-         });
-
-         context.setState({reviews: data});
+        console.log(data.length);
+         if (data.length === 0 ) {
+           context.setState({reviews: [{name: 'NOT FOUND '}], location: 'NOT FOUND ', category: 'NOT FOUND'});
+         } else {
+           context.setState({location: data[0].location}, function () {
+             data.reduce(function (acc, review, index, array) {
+               if (acc === false) {
+                 context.setState({location: 'Multiple Locations', category: 'All Categories' });
+               }
+               console.log(acc);
+               if (index + 1 !== array.length) {
+                 return acc && array[index].location === array[index + 1].location;
+               }
+             }, true);
+           });
+           context.setState({reviews: data});
+         }
        },
        error: function (error) {
          console.log('you have an error');

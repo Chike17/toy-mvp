@@ -99,23 +99,27 @@
 	      queryName: '',
 	      name: ''
 	    };
-	    var context = _this;
-	    _jquery2.default.ajax({
-	      type: 'GET',
-	      url: 'http://localhost:3000/alldata',
-	      dataType: 'json',
-	      success: function success(data) {
-	        console.log('success on GET');
-	        context.setState({ reviews: data });
-	      },
-	      error: function error(_error) {
-	        console.log(_error);
-	      }
-	    });
 	    return _this;
 	  }
 	
 	  _createClass(App, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var context = this;
+	      _jquery2.default.ajax({
+	        type: 'GET',
+	        url: 'http://localhost:3000/alldata',
+	        dataType: 'json',
+	        success: function success(data) {
+	          console.log('success on GET');
+	          context.setState({ reviews: data });
+	        },
+	        error: function error(_error) {
+	          console.log(_error);
+	        }
+	      });
+	    }
+	  }, {
 	    key: 'queryByName',
 	    value: function queryByName(e) {
 	      var context = this;
@@ -163,19 +167,23 @@
 	        url: 'http://localhost:3000/getspecbiz',
 	        dataType: 'json',
 	        success: function success(data) {
-	          context.setState({ location: data[0].location }, function () {
-	            data.reduce(function (acc, review, index, array) {
-	              if (acc === false) {
-	                context.setState({ location: 'Multiple Locations', category: 'All Categories' });
-	              }
-	              console.log(acc);
-	              if (index + 1 !== array.length) {
-	                return acc && array[index].location === array[index + 1].location;
-	              }
-	            }, true);
-	          });
-	
-	          context.setState({ reviews: data });
+	          console.log(data.length);
+	          if (data.length === 0) {
+	            context.setState({ reviews: [{ name: 'NOT FOUND ' }], location: 'NOT FOUND ', category: 'NOT FOUND' });
+	          } else {
+	            context.setState({ location: data[0].location }, function () {
+	              data.reduce(function (acc, review, index, array) {
+	                if (acc === false) {
+	                  context.setState({ location: 'Multiple Locations', category: 'All Categories' });
+	                }
+	                console.log(acc);
+	                if (index + 1 !== array.length) {
+	                  return acc && array[index].location === array[index + 1].location;
+	                }
+	              }, true);
+	            });
+	            context.setState({ reviews: data });
+	          }
 	        },
 	        error: function error(_error3) {
 	          console.log('you have an error');
