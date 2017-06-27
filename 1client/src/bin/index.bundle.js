@@ -120,47 +120,12 @@
 	    value: function queryByName(e) {
 	      var context = this;
 	      context.setState({ queryName: e.target.value });
-	      // console.log(e.target.value);
-	      // $.ajax({
-	      //   type: 'POST',
-	      //   data: {'query': e.target.value},
-	      //   url: 'http://localhost:3000/bybusiness',
-	      //   dataType: 'json',
-	      //   success: function (data) {
-	      //     console.log('success');
-	      //     console.log(data);
-	      //     context.setState({reviews: data});
-	      //     context.setState({location: data[0].location});
-	      //     context.setState({category: data[0].category});
-	
-	      //   },
-	      //   error: function (error) {
-	      //     console.log('you have an error');
-	      //     console.log(error);
-	      //   }
-	      // });
 	    }
 	  }, {
 	    key: 'queryByLocation',
 	    value: function queryByLocation(e) {
 	      var context = this;
 	      context.setState({ queryLocation: e.target.value });
-	      // console.log(e.target.value);
-	      // $.ajax({
-	      //   type: 'POST',
-	      //   data: {'query': e.target.value},
-	      //   url: 'http://localhost:3000/bylocation',
-	      //   dataType: 'json',
-	      //   success: function (data) {
-	      //     console.log('success');
-	      //     console.log(data);
-	      //     context.setState({reviews: data});
-	      //   },
-	      //   error: function (error) {
-	      //     console.log('you have an error');
-	      //     console.log(error);
-	      //   }
-	      // });
 	    }
 	  }, {
 	    key: 'filterCategory',
@@ -199,9 +164,9 @@
 	        dataType: 'json',
 	        success: function success(data) {
 	          context.setState({ location: data[0].location }, function () {
-	            var locStatus = data.reduce(function (acc, review, index, array) {
+	            data.reduce(function (acc, review, index, array) {
 	              if (acc === false) {
-	                context.setState({ location: 'Multiple Locations' });
+	                context.setState({ location: 'Multiple Locations', category: 'All Categories' });
 	              }
 	              console.log(acc);
 	              if (index + 1 !== array.length) {
