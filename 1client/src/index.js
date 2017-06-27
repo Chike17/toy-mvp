@@ -99,7 +99,7 @@
          if (data.length === 0 ) {
            context.setState({reviews: [{name: 'NOT FOUND '}], location: 'NOT FOUND ', category: 'NOT FOUND'});
          } else {
-           context.setState({location: data[0].location}, function () {
+           context.setState({location: data[0].location, category: 'All Categories'}, function () {
              data.reduce(function (acc, review, index, array) {
                if (acc === false) {
                  context.setState({location: 'Multiple Locations', category: 'All Categories' });
