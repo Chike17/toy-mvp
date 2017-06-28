@@ -95,9 +95,12 @@
        url: 'http://localhost:3000/getspecbiz',
        dataType: 'json',
        success: function (data) {
-         console.log(data.length);
          if (data.length === 0 ) {
            context.setState({reviews: [{name: 'NOT FOUND '}], location: 'NOT FOUND ', category: 'NOT FOUND'});
+           return;
+         } 
+         if (data[0].name === 'INVALID QUERY') {
+           context.setState({location: 'INVALID QUERY', category: 'INVALID QUERY', reviews: data});
          } else {
            context.setState({location: data[0].location, category: 'All Categories'}, function () {
              data.reduce(function (acc, review, index, array) {

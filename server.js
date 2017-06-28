@@ -15,18 +15,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname));
 
 
-Review.find({}).exec(function (error, data) {
-  // console.log(data);
-});
+// Review.find({}).exec(function (error, data) {
+//   console.log(data);
+// });
 
 app.get('/alldata', function (req, res) {
   Review.find({}).exec(function (error, data) {
-    // console.log(data, '?????');
+    console.log(data, '?????');
     res.send(data);
   });
 }); 
-
-
 
 app.post('/filter', function (req, res) {
   var query = req.body.query;
