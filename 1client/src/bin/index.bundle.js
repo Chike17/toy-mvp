@@ -33251,7 +33251,6 @@
 	      inputBusiness = _ref.inputBusiness,
 	      inputLocation = _ref.inputLocation,
 	      reviews = _ref.reviews,
-	      getSpecBiz = _ref.getSpecBiz,
 	      getBizLoc = _ref.getBizLoc;
 	
 	  return _react2.default.createElement(
@@ -33283,7 +33282,7 @@
 	            _react2.default.createElement('input', { onChange: inputLocation })
 	          )
 	        ),
-	        _react2.default.createElement('input', { type: 'submit', value: 'Submit', className: _styles2.default.submit })
+	        _react2.default.createElement('input', { type: 'submit', value: 'Search', className: _styles2.default.submit })
 	      )
 	    ),
 	    _react2.default.createElement(

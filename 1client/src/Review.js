@@ -2,7 +2,7 @@ import React from 'react';
 import Reviews from './Reviews.js';
 import styles from './styles.css';
 //should call this component input
-var Review = ({category, location, inputBusiness, inputLocation, reviews, getSpecBiz, getBizLoc}) => {
+var Review = ({category, location, inputBusiness, inputLocation, reviews, getBizLoc}) => {
   return (
    <div >
    <div>
@@ -23,7 +23,7 @@ var Review = ({category, location, inputBusiness, inputLocation, reviews, getSpe
       
      </div>
      
-       <input type = 'submit' value = 'Submit' className = {styles.submit}  />
+      <input type = 'submit' value = 'Search' className = {styles.submit} />
      
     </form>
     </div>
