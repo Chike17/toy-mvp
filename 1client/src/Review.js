@@ -1,8 +1,9 @@
 import React from 'react';
 import Reviews from './Reviews.js';
 import styles from './styles.css';
-//should call this component input
-var Review = ({category, location, inputBusiness, inputLocation, reviews, getBizLoc}) => {
+//should call this component input2
+
+var Review = ({queryFirstName, queryLastName, category, location, queryCategory, inputLocation, reviews, getBizLoc}) => {
   return (
    <div >
    <div>
@@ -10,8 +11,18 @@ var Review = ({category, location, inputBusiness, inputLocation, reviews, getBiz
    <form onSubmit = { getBizLoc } >
    <div className = {styles.bizinput}>
         <label>
-          Business Name :
-          <input onChange = {inputBusiness} />
+          First Name :
+          <input onChange = {queryFirstName} />
+        </label>
+
+        <label>
+          Last Name :
+          <input onChange = {queryLastName} />
+        </label>
+
+        <label>
+          Category :
+          <input onChange = {queryCategory} />
         </label>
     </div>
   

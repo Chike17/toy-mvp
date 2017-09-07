@@ -6,24 +6,48 @@ var Reviews = (props) => {
     <div className = {styles.reviewContainer} >
 
       {props.eachReview.map((review) => 
+
+
+
+
       <div className = {styles.reviewEntry}>
 
-      	 <div >Name: {review.name} </div> 
+        <div>
+
+      	  <div > First Name: {review.FirstName} </div> 
+
+
+          <div > Last Name: {review.LastName} </div> 
+
       	 	
 
-      	 <div> Rating: {review.rating} </div>
+      	   <div> Rating: {review.Rating} </div>
+
       	 
-      	 	
-      	 <div> Location: {review.location} </div>
+      	   <div> Category: {review.Category} </div>
 
+      	 </div>
 
-      	 <div> Category: {review.category} </div>
+      	 
+          <div>
 
+      	    <div> Location: {review.Location} </div>
 
-      	 <div> Review: {review.review} </div>
+      	  </div>
 
+         
+          <div>
+
+      	     <div> Review: {review.Review} </div>
+
+      	   </div>
 
        </div>
+
+
+
+
+
       )}
 
    </div>

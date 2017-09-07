@@ -96,8 +96,9 @@
 	      category: 'All Categories',
 	      location: 'All Locations',
 	      queryLocation: '',
-	      queryName: '',
-	      name: ''
+	      queryCategory: '',
+	      firstName: '',
+	      lastName: ''
 	    };
 	    return _this;
 	  }
@@ -112,6 +113,7 @@
 	        dataType: 'json',
 	        success: function success(data) {
 	          console.log('success on GET');
+	          console.log(data);
 	          context.setState({ reviews: data });
 	        },
 	        error: function error(_error) {
@@ -120,10 +122,22 @@
 	      });
 	    }
 	  }, {
-	    key: 'queryByName',
-	    value: function queryByName(e) {
+	    key: 'queryFirstName',
+	    value: function queryFirstName(e) {
 	      var context = this;
-	      context.setState({ queryName: e.target.value });
+	      context.setState({ firstName: e.target.value });
+	    }
+	  }, {
+	    key: 'queryLastName',
+	    value: function queryLastName(e) {
+	      var context = this;
+	      context.setState({ lastName: e.target.value });
+	    }
+	  }, {
+	    key: 'queryCategory',
+	    value: function queryCategory(e) {
+	      var context = this;
+	      context.setState({ queryCategory: e.target.value });
 	    }
 	  }, {
 	    key: 'queryByLocation',
@@ -144,8 +158,7 @@
 	        success: function success(data) {
 	          console.log('success');
 	          console.log(data);
-	          context.setState({ reviews: data });
-	          context.setState({ location: 'All Locations' });
+	          context.setState({ reviews: data, location: 'All locations' });
 	        },
 	        error: function error(_error2) {
 	          console.log('you have an error');
@@ -179,12 +192,11 @@
 	    key: 'handleBizLoc',
 	    value: function handleBizLoc(e) {
 	      e.preventDefault();
-	      console.log(this.state.queryName);
 	      console.log(this.state.queryLocation);
 	      var context = this;
 	      _jquery2.default.ajax({
 	        type: 'POST',
-	        data: { 'submit': { name: context.state.queryName, location: context.state.queryLocation } },
+	        data: { 'submit': { firstName: context.state.firstName, lastName: context.state.lastName, category: context.state.queryCategory, location: context.state.queryLocation } },
 	        url: 'http://localhost:3000/getspecbiz',
 	        dataType: 'json',
 	        success: function success(data) {
@@ -255,7 +267,14 @@
 	            ' Massage Parlors '
 	          )
 	        ),
-	        _react2.default.createElement(_Review2.default, { reviews: this.state.reviews, category: this.state.category, location: this.state.location, inputBusiness: this.queryByName.bind(this), inputLocation: this.queryByLocation.bind(this), getBizLoc: this.handleBizLoc.bind(this) })
+	        _react2.default.createElement(_Review2.default, { reviews: this.state.reviews,
+	          category: this.state.category,
+	          location: this.state.location,
+	          queryFirstName: this.queryFirstName.bind(this),
+	          queryLastName: this.queryLastName.bind(this),
+	          queryCategory: this.queryCategory.bind(this),
+	          inputLocation: this.queryByLocation.bind(this),
+	          getBizLoc: this.handleBizLoc.bind(this) })
 	      );
 	    }
 	  }]);
@@ -33247,11 +33266,14 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	//should call this component input
+	//should call this component input2
+	
 	var Review = function Review(_ref) {
-	  var category = _ref.category,
+	  var queryFirstName = _ref.queryFirstName,
+	      queryLastName = _ref.queryLastName,
+	      category = _ref.category,
 	      location = _ref.location,
-	      inputBusiness = _ref.inputBusiness,
+	      queryCategory = _ref.queryCategory,
 	      inputLocation = _ref.inputLocation,
 	      reviews = _ref.reviews,
 	      getBizLoc = _ref.getBizLoc;
@@ -33271,8 +33293,20 @@
 	          _react2.default.createElement(
 	            'label',
 	            null,
-	            'Business Name :',
-	            _react2.default.createElement('input', { onChange: inputBusiness })
+	            'First Name :',
+	            _react2.default.createElement('input', { onChange: queryFirstName })
+	          ),
+	          _react2.default.createElement(
+	            'label',
+	            null,
+	            'Last Name :',
+	            _react2.default.createElement('input', { onChange: queryLastName })
+	          ),
+	          _react2.default.createElement(
+	            'label',
+	            null,
+	            'Category :',
+	            _react2.default.createElement('input', { onChange: queryCategory })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -33337,37 +33371,56 @@
 	        _react2.default.createElement(
 	          'div',
 	          null,
-	          'Name: ',
-	          review.name,
-	          ' '
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            ' First Name: ',
+	            review.FirstName,
+	            ' '
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            ' Last Name: ',
+	            review.LastName,
+	            ' '
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            ' Rating: ',
+	            review.Rating,
+	            ' '
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            ' Category: ',
+	            review.Category,
+	            ' '
+	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',
 	          null,
-	          ' Rating: ',
-	          review.rating,
-	          ' '
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            ' Location: ',
+	            review.Location,
+	            ' '
+	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',
 	          null,
-	          ' Location: ',
-	          review.location,
-	          ' '
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          ' Category: ',
-	          review.category,
-	          ' '
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          ' Review: ',
-	          review.review,
-	          ' '
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            ' Review: ',
+	            review.Review,
+	            ' '
+	          )
 	        )
 	      );
 	    })
@@ -33422,11 +33475,13 @@
 	
 	
 	// module
-	exports.push([module.id, ".styles__reviewContainer___e4XtJ {\n padding: 20px;\n width: 300px;\n height: 1000px;\n margin-left: 400px;\n}\n\n\n.styles__reviewEntry___3jrzN {\n  text-align: center;\n  margin-bottom: 10px;\n  margin-left: 10px;\n  padding: 10px;\n  border: 2px;\n  border-radius: 25px;\n  background: #E2D8D4;\n  display: inline-block;\n  width: 400px;\n  word-wrap: break-word;\n}\n\n\n.styles__bizinput___CMJXA {\n padding: 20px;\n \n}\n\n.styles__locinput___3Cz8w {\n padding: 20px;\n margin-left: 45px;\n}\n\n.styles__catcontainer___2JQ92 {\n   padding: 20px;\n   width: 300px;\n   margin-left: 400px;\n   text-align: center;\n}\n\n.styles__categories___3ZKx2 {\n  width: 400px;\n  border: 2px;\n  margin-bottom: 10px;\n  margin-left: 10px;\n}\n\n.styles__catpick___2R-sv {\n  cursor: pointer;\n}\n\n.styles__submit___2BcZC {\n  margin-left: 235px;\n}\n\n.styles__headerstyles___1Ot2C {\n  padding: 20px;\n  margin-left:  -18px;\n  cursor: pointer;\n}\n", ""]);
+	exports.push([module.id, ".styles__reviewContainer___e4XtJ {\n padding: 20px;\n width: 300px;\n height: 1000px;\n margin-left: 400px;\n}\n\n.styles__reviewInfo___2SAUl {\n\n}\n\n.styles__reviewAddress___2hgmR {\n\n\n}\n.styles__reviewEntry___3jrzN {\n  text-align: center;\n  margin-bottom: 10px;\n  margin-left: 10px;\n  padding: 10px;\n  border: 2px;\n  border-radius: 25px;\n  background: #E2D8D4;\n  display: inline-block;\n  width: 400px;\n  word-wrap: break-word;\n}\n\n\n.styles__bizinput___CMJXA {\n padding: 20px;\n \n}\n\n.styles__locinput___3Cz8w {\n padding: 20px;\n margin-left: 45px;\n}\n\n.styles__catcontainer___2JQ92 {\n   padding: 20px;\n   width: 300px;\n   margin-left: 400px;\n   text-align: center;\n}\n\n.styles__categories___3ZKx2 {\n  width: 400px;\n  border: 2px;\n  margin-bottom: 10px;\n  margin-left: 10px;\n}\n\n.styles__catpick___2R-sv {\n  cursor: pointer;\n}\n\n.styles__submit___2BcZC {\n  margin-left: 235px;\n}\n\n.styles__headerstyles___1Ot2C {\n  padding: 20px;\n  margin-left:  -18px;\n  cursor: pointer;\n}\n", ""]);
 	
 	// exports
 	exports.locals = {
 		"reviewContainer": "styles__reviewContainer___e4XtJ",
+		"reviewInfo": "styles__reviewInfo___2SAUl",
+		"reviewAddress": "styles__reviewAddress___2hgmR",
 		"reviewEntry": "styles__reviewEntry___3jrzN",
 		"bizinput": "styles__bizinput___CMJXA",
 		"locinput": "styles__locinput___3Cz8w",

@@ -6,6 +6,7 @@
  import styles from './styles.css';
 
  class App extends React.Component {
+
    constructor(props) {
      super(props);
      this.state = {
@@ -13,10 +14,12 @@
        category: 'All Categories',
        location: 'All Locations',
        queryLocation: '',
-       queryName: '',
-       name: ''
+       queryCategory: '',
+       firstName: '',
+       lastName: ''
      };
    }
+
    componentDidMount() {
      var context = this;
      $.ajax({
@@ -25,6 +28,7 @@
        dataType: 'json',
        success: function (data) {
          console.log('success on GET');
+         console.log(data);
          context.setState({reviews: data});
        },
        error: function (error) {
@@ -33,9 +37,19 @@
      });
    }
 
-   queryByName (e) {
+   queryFirstName (e) {
      var context = this;
-     context.setState({queryName: e.target.value});
+     context.setState({firstName: e.target.value});
+   }
+
+   queryLastName (e) {
+     var context = this;
+     context.setState({lastName: e.target.value});
+   }
+
+   queryCategory (e) {
+     var context = this;
+     context.setState({queryCategory: e.target.value});
    }
 
    queryByLocation (e) {
@@ -54,8 +68,7 @@
        success: function (data) {
          console.log('success');
          console.log(data);
-         context.setState({reviews: data});
-         context.setState({location: 'All Locations'});
+         context.setState({reviews: data, location: 'All locations'});
        },
        error: function (error) {
          console.log('you have an error');
@@ -85,13 +98,12 @@
    }
    handleBizLoc (e) {
      e.preventDefault();
-     console.log(this.state.queryName);
      console.log(this.state.queryLocation);
      var context = this;
      $.ajax({
        type: 'POST',
        data: {'submit': 
-       {name: context.state.queryName, location: context.state.queryLocation}},
+       {firstName: context.state.firstName, lastName: context.state.lastName, category: context.state.queryCategory, location: context.state.queryLocation}},
        url: 'http://localhost:3000/getspecbiz',
        dataType: 'json',
        success: function (data) {
@@ -134,7 +146,14 @@
          <span className = {styles.catpick} onClick = {function () { this.filterCategory('Massage Parlors'); }.bind(this) }> Massage Parlors </span> 
          </p>
 
-         <Review reviews = {this.state.reviews} category = {this.state.category} location = {this.state.location} inputBusiness = {this.queryByName.bind(this)} inputLocation = {this.queryByLocation.bind(this)} getBizLoc = {this.handleBizLoc.bind(this)}/>
+         <Review reviews = {this.state.reviews} 
+         category = {this.state.category} 
+         location = {this.state.location} 
+         queryFirstName = {this.queryFirstName.bind(this)} 
+         queryLastName = {this.queryLastName.bind(this)} 
+         queryCategory = {this.queryCategory.bind(this)} 
+         inputLocation = {this.queryByLocation.bind(this)} 
+         getBizLoc = {this.handleBizLoc.bind(this)}/>
         </div>
      );
    }
