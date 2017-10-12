@@ -114,14 +114,14 @@
          if (data[0].name === 'INVALID QUERY') {
            context.setState({location: 'INVALID QUERY', category: 'INVALID QUERY', reviews: data});
          } else {
-           context.setState({location: data[0].location, category: 'All Categories'}, function () {
+           context.setState({location: data[0].Location, category: 'All Categories'}, function () {
              data.reduce(function (acc, review, index, array) {
+              console.log(acc);
                if (acc === false) {
-                 context.setState({location: 'Multiple Locations', category: 'All Categories' });
+                 context.setState({Location: 'Multiple Locations'});
                }
-               console.log(acc);
                if (index + 1 !== array.length) {
-                 return acc && array[index].location === array[index + 1].location;
+                 return acc && array[index].Location === array[index + 1].Location;
                }
              }, true);
            });
@@ -139,12 +139,14 @@
      return (
         <div>
         <div onClick = { () => { this.fetchAllReviews(); } } className = {styles.headerstyles} id="logo"> Take Care </div>
-
-         <p className = {styles}>
-         <span className = {styles.catpick} onClick = {function () { this.filterCategory('Barbershops'); }.bind(this) }> Barbershops | </span>
-         <span className = {styles.catpick} onClick = {function () { this.filterCategory('Nail Salons'); }.bind(this) }> Nail Salons | </span>
-         <span className = {styles.catpick} onClick = {function () { this.filterCategory('Massage Parlors'); }.bind(this) }> Massage Parlors </span> 
+          
+         <div className = {styles.catpick}>
+         <p >
+         <span onClick = {function () { this.filterCategory('Barbershops'); }.bind(this) }> Barbers | </span>
+         <span onClick = {function () { this.filterCategory('Nail Salons'); }.bind(this) }> Nail Technicians | </span>
+         <span onClick = {function () { this.filterCategory('Massage Parlors'); }.bind(this) }> Massuueses </span> 
          </p>
+         </div>
 
          <Review reviews = {this.state.reviews} 
          category = {this.state.category} 

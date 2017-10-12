@@ -8,7 +8,6 @@ mongoose.Promise = require('bluebird');
 var Review = require('./2back-end/models.js');
 var db = require('./2back-end/dbconfig.js');
 
-
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -34,17 +33,14 @@ app.post('/filter', function (req, res) {
 });
 
 app.post('/getspecbiz', function (req, res) {
+
   console.log(req.body, 'req.body');
 
   var firstName = req.body.submit.firstName;
-
   var lastName = req.body.submit.lastName;
-
   var location = req.body.submit.location;
-
   var category = req.body.submit.category;
  
-
   if (firstName === '' && lastName === '' && location === '' && category === '') {
     res.send([{name: 'INVALID QUERY'}]);
     return;

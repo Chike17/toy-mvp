@@ -4,21 +4,7 @@ var WorkReviewSchema = require('./2back-end/models.js');
 mongoose.Promise = require('bluebird');
 
 
-// var rvw = new WorkReviewSchema(
-//       {
-//         'FirstName': 'ffff', 
-//         'LastName': 'fffff', 
-//         'Rating': 'ffffffff', 
-//         'Location': 'ffffffffff', 
-//         'Review': 'ffffffff',
-//         'Categor': 'ffffff'
-//       });
-
-// console.log(rvw);
-
 // Stock Dummy Data
-
-
 
 var nailSalonReview = {'FirstName': 'Dummy Nail Salon First Name', 'LastName': 'Dummy Nail Salon Last Name', 'Review': 'Dummy Nail Salon Review', 'Rating': 'Dummy Nail Salon Rating', 'Category': 'Nail Salons', 'Review': 'Dummy Nail Salon Review'};
 
@@ -27,8 +13,6 @@ var barberShopReview = {'FirstName': 'Dummy Barber Shop First Name', 'LastName':
 var massageParlorReview = {'FirstName': 'Dummy Massage Parlor First Name', 'LastName': 'Dummy Massage Parlor First Name', 'Review': 'Dummy Massage Parlor Review', 'Rating': 'Dummy Massage Parlor Rating', 'Category': 'Massage Parlors', 'Review': 'Dummy Massage Parlor Review'};
 
 var stockData = [nailSalonReview, barberShopReview, massageParlorReview];
-
-
 
 
 // // 3 Silly Dummy Reviews
@@ -63,7 +47,6 @@ var stockData = [nailSalonReview, barberShopReview, massageParlorReview];
 
 var locations = ['Chicago', 'San Francisco', 'Boston'];
 
-var reviewNumber = 1;
 
 // // insert multiple stock reviews in random locations with random ratings
 
@@ -84,15 +67,14 @@ var insertStockReviews = function () {
         'Category': stockData[i].Category
       });
     rvw.save();
-    reviewNumber++;
     console.log(rvw);
   }
 };
 
 
-for (var i = 0; i < 20; i++) {
-  insertStockReviews();
-}
+// for (var i = 0; i < 20; i++) {
+//   insertStockReviews();
+// }
 
 
 // WorkReviewSchema.find({}, function (error, data) {

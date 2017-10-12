@@ -24,17 +24,19 @@ var Review = ({queryFirstName, queryLastName, category, location, queryCategory,
           Category :
           <input onChange = {queryCategory} />
         </label>
-    </div>
-  
-    <div className = {styles.locinput} >
+
         <label >
           Location :
           <input onChange = {inputLocation} />
         </label>
-      
-     </div>
+
+        <label>
+          <input type = 'submit' value = 'Search' className = {styles.submit} />
+        </label>
+
+
+    </div>
      
-      <input type = 'submit' value = 'Search' className = {styles.submit} />
      
     </form>
     </div>

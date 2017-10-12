@@ -207,14 +207,14 @@
 	          if (data[0].name === 'INVALID QUERY') {
 	            context.setState({ location: 'INVALID QUERY', category: 'INVALID QUERY', reviews: data });
 	          } else {
-	            context.setState({ location: data[0].location, category: 'All Categories' }, function () {
+	            context.setState({ location: data[0].Location, category: 'All Categories' }, function () {
 	              data.reduce(function (acc, review, index, array) {
-	                if (acc === false) {
-	                  context.setState({ location: 'Multiple Locations', category: 'All Categories' });
-	                }
 	                console.log(acc);
+	                if (acc === false) {
+	                  context.setState({ Location: 'Multiple Locations' });
+	                }
 	                if (index + 1 !== array.length) {
-	                  return acc && array[index].location === array[index + 1].location;
+	                  return acc && array[index].Location === array[index + 1].Location;
 	                }
 	              }, true);
 	            });
@@ -243,28 +243,32 @@
 	          ' Take Care '
 	        ),
 	        _react2.default.createElement(
-	          'p',
-	          { className: _styles2.default },
+	          'div',
+	          { className: _styles2.default.catpick },
 	          _react2.default.createElement(
-	            'span',
-	            { className: _styles2.default.catpick, onClick: function () {
-	                this.filterCategory('Barbershops');
-	              }.bind(this) },
-	            ' Barbershops | '
-	          ),
-	          _react2.default.createElement(
-	            'span',
-	            { className: _styles2.default.catpick, onClick: function () {
-	                this.filterCategory('Nail Salons');
-	              }.bind(this) },
-	            ' Nail Salons | '
-	          ),
-	          _react2.default.createElement(
-	            'span',
-	            { className: _styles2.default.catpick, onClick: function () {
-	                this.filterCategory('Massage Parlors');
-	              }.bind(this) },
-	            ' Massage Parlors '
+	            'p',
+	            null,
+	            _react2.default.createElement(
+	              'span',
+	              { onClick: function () {
+	                  this.filterCategory('Barbershops');
+	                }.bind(this) },
+	              ' Barbers | '
+	            ),
+	            _react2.default.createElement(
+	              'span',
+	              { onClick: function () {
+	                  this.filterCategory('Nail Salons');
+	                }.bind(this) },
+	              ' Nail Technicians | '
+	            ),
+	            _react2.default.createElement(
+	              'span',
+	              { onClick: function () {
+	                  this.filterCategory('Massage Parlors');
+	                }.bind(this) },
+	              ' Massuueses '
+	            )
 	          )
 	        ),
 	        _react2.default.createElement(_Review2.default, { reviews: this.state.reviews,
@@ -33307,19 +33311,19 @@
 	            null,
 	            'Category :',
 	            _react2.default.createElement('input', { onChange: queryCategory })
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: _styles2.default.locinput },
+	          ),
 	          _react2.default.createElement(
 	            'label',
 	            null,
 	            'Location :',
 	            _react2.default.createElement('input', { onChange: inputLocation })
+	          ),
+	          _react2.default.createElement(
+	            'label',
+	            null,
+	            _react2.default.createElement('input', { type: 'submit', value: 'Search', className: _styles2.default.submit })
 	          )
-	        ),
-	        _react2.default.createElement('input', { type: 'submit', value: 'Search', className: _styles2.default.submit })
+	        )
 	      )
 	    ),
 	    _react2.default.createElement(
@@ -33370,7 +33374,16 @@
 	        { className: _styles2.default.reviewEntry },
 	        _react2.default.createElement(
 	          'div',
-	          null,
+	          { className: _styles2.default.workerpicture },
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            ' Picture '
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: _styles2.default.workerdata },
 	          _react2.default.createElement(
 	            'div',
 	            null,
@@ -33398,22 +33411,14 @@
 	            ' Category: ',
 	            review.Category,
 	            ' '
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          null,
+	          ),
 	          _react2.default.createElement(
 	            'div',
 	            null,
 	            ' Location: ',
 	            review.Location,
 	            ' '
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          null,
+	          ),
 	          _react2.default.createElement(
 	            'div',
 	            null,
@@ -33475,13 +33480,15 @@
 	
 	
 	// module
-	exports.push([module.id, ".styles__reviewContainer___e4XtJ {\n padding: 20px;\n width: 300px;\n height: 1000px;\n margin-left: 400px;\n}\n\n.styles__reviewInfo___2SAUl {\n\n}\n\n.styles__reviewAddress___2hgmR {\n\n\n}\n.styles__reviewEntry___3jrzN {\n  text-align: center;\n  margin-bottom: 10px;\n  margin-left: 10px;\n  padding: 10px;\n  border: 2px;\n  border-radius: 25px;\n  background: #E2D8D4;\n  display: inline-block;\n  width: 400px;\n  word-wrap: break-word;\n}\n\n\n.styles__bizinput___CMJXA {\n padding: 20px;\n \n}\n\n.styles__locinput___3Cz8w {\n padding: 20px;\n margin-left: 45px;\n}\n\n.styles__catcontainer___2JQ92 {\n   padding: 20px;\n   width: 300px;\n   margin-left: 400px;\n   text-align: center;\n}\n\n.styles__categories___3ZKx2 {\n  width: 400px;\n  border: 2px;\n  margin-bottom: 10px;\n  margin-left: 10px;\n}\n\n.styles__catpick___2R-sv {\n  cursor: pointer;\n}\n\n.styles__submit___2BcZC {\n  margin-left: 235px;\n}\n\n.styles__headerstyles___1Ot2C {\n  padding: 20px;\n  margin-left:  -18px;\n  cursor: pointer;\n}\n", ""]);
+	exports.push([module.id, ".styles__reviewContainer___e4XtJ {\n padding: 20px;\n width: 300px;\n height: 1000px;\n margin-left: 200px;\n}\n\n.styles__reviewInfo___2SAUl {\n\n}\n\n.styles__reviewAddress___2hgmR {\n\n\n}\n\n.styles__workerpicture___uJIik {\n  width: 250px;\n  height: 110px;\n  float:left;\n  border: 1px solid red;\n  padding: 50px;\n}\n\n.styles__workerdata___3ZdZg {\n  border: 1px;\n  overflow: hidden;\n}\n\n.styles__reviewEntry___3jrzN {\n  text-align: center;\n  margin-bottom: 10px;\n  margin-left: 10px;\n  padding: 20px;\n  border: 2px;\n  border-radius: 25px;\n  background: #E2D8D4;\n  display: inline-block;\n  width: 800px;\n  word-wrap: break-word;\n}\n\n\n.styles__bizinput___CMJXA {\n padding: 20px;\n text-align: center;\n \n}\n\n.styles__locinput___3Cz8w {\n padding: 20px;\n margin-left: 45px;\n}\n\n.styles__catcontainer___2JQ92 {\n   padding: 20px;\n   width: 300px;\n   margin-left: 400px;\n   text-align: center;\n}\n\n.styles__categories___3ZKx2 {\n  width: 400px;\n  border: 2px;\n  margin-bottom: 10px;\n  margin-left: 10px;\n}\n\n.styles__catpick___2R-sv {\n  cursor: pointer;\n  text-align: center;\n}\n\n.styles__submit___2BcZC {\n  margin-left: 10px;\n}\n\n.styles__headerstyles___1Ot2C {\n  padding: 20px;\n  margin-left:  -18px;\n  cursor: pointer;\n}\n", ""]);
 	
 	// exports
 	exports.locals = {
 		"reviewContainer": "styles__reviewContainer___e4XtJ",
 		"reviewInfo": "styles__reviewInfo___2SAUl",
 		"reviewAddress": "styles__reviewAddress___2hgmR",
+		"workerpicture": "styles__workerpicture___uJIik",
+		"workerdata": "styles__workerdata___3ZdZg",
 		"reviewEntry": "styles__reviewEntry___3jrzN",
 		"bizinput": "styles__bizinput___CMJXA",
 		"locinput": "styles__locinput___3Cz8w",

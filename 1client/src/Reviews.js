@@ -7,46 +7,33 @@ var Reviews = (props) => {
 
       {props.eachReview.map((review) => 
 
-
-
-
       <div className = {styles.reviewEntry}>
 
-        <div>
+      <div className = {styles.workerpicture} > 
+
+        <div> Picture </div>
+
+      </div>
+
+        <div className = {styles.workerdata}>
 
       	  <div > First Name: {review.FirstName} </div> 
 
-
           <div > Last Name: {review.LastName} </div> 
-
-      	 	
 
       	   <div> Rating: {review.Rating} </div>
 
-      	 
       	   <div> Category: {review.Category} </div>
 
-      	 </div>
+      	   <div> Location: {review.Location} </div>
 
-      	 
-          <div>
+      	   <div> Review: {review.Review} </div>
 
-      	    <div> Location: {review.Location} </div>
 
-      	  </div>
+         </div>
 
-         
-          <div>
-
-      	     <div> Review: {review.Review} </div>
-
-      	   </div>
 
        </div>
-
-
-
-
 
       )}
 

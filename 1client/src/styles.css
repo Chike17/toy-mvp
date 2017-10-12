@@ -2,7 +2,7 @@
  padding: 20px;
  width: 300px;
  height: 1000px;
- margin-left: 400px;
+ margin-left: 200px;
 }
 
 .reviewInfo {
@@ -13,22 +13,37 @@
 
 
 }
+
+.workerpicture {
+  width: 250px;
+  height: 110px;
+  float:left;
+  border: 1px solid red;
+  padding: 50px;
+}
+
+.workerdata {
+  border: 1px;
+  overflow: hidden;
+}
+
 .reviewEntry {
   text-align: center;
   margin-bottom: 10px;
   margin-left: 10px;
-  padding: 10px;
+  padding: 20px;
   border: 2px;
   border-radius: 25px;
   background: #E2D8D4;
   display: inline-block;
-  width: 400px;
+  width: 800px;
   word-wrap: break-word;
 }
 
 
 .bizinput {
  padding: 20px;
+ text-align: center;
  
 }
 
@@ -53,10 +68,11 @@
 
 .catpick {
   cursor: pointer;
+  text-align: center;
 }
 
 .submit {
-  margin-left: 235px;
+  margin-left: 10px;
 }
 
 .headerstyles {
