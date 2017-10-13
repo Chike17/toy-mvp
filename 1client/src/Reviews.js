@@ -3,7 +3,7 @@ import styles from './styles.css';
 
 var Reviews = (props) => {
   return (
-    <div className = {styles.reviewContainer} >
+    <div className = {styles.reviewContainer}>
 
       {props.eachReview.map((review) => 
 

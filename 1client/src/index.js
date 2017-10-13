@@ -167,6 +167,7 @@
          inputLocation = {this.queryByLocation.bind(this)} 
          getBizLoc = {this.handleBizLoc.bind(this)}/>
         </div>
+        
      );
    }
 }

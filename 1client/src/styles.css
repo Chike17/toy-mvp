@@ -1,8 +1,5 @@
 .reviewContainer {
- padding: 20px;
- width: 300px;
- height: 1000px;
- margin-left: 200px;
+ text-align: center;
 }
 
 .reviewInfo {
@@ -53,9 +50,7 @@
 }
 
 .catcontainer {
-   padding: 20px;
-   width: 300px;
-   margin-left: 400px;
+   padding: 40px;
    text-align: center;
 }
 

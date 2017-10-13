@@ -34,15 +34,14 @@ var Review = ({queryFirstName, queryLastName, category, location, queryCategory,
           <input type = 'submit' value = 'Search' className = {styles.submit} />
         </label>
 
-
     </div>
-     
      
     </form>
     </div>
 
+
     <div className = {styles.catcontainer}>
-    <div className = {styles.categories}> {category} | {location} </div>
+      <div > {category} | {location} </div>
     </div>
 
     <Reviews eachReview = {reviews} /> 

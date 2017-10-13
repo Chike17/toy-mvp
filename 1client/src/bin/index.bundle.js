@@ -33339,7 +33339,7 @@
 	      { className: _styles2.default.catcontainer },
 	      _react2.default.createElement(
 	        'div',
-	        { className: _styles2.default.categories },
+	        null,
 	        ' ',
 	        category,
 	        ' | ',
@@ -33488,7 +33488,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".styles__reviewContainer___e4XtJ {\n padding: 20px;\n width: 300px;\n height: 1000px;\n margin-left: 200px;\n}\n\n.styles__reviewInfo___2SAUl {\n\n}\n\n.styles__reviewAddress___2hgmR {\n\n\n}\n\n.styles__workerpicture___uJIik {\n  width: 250px;\n  height: 110px;\n  float:left;\n  border: 1px solid red;\n  padding: 50px;\n}\n\n.styles__workerdata___3ZdZg {\n  border: 1px;\n  overflow: hidden;\n}\n\n.styles__reviewEntry___3jrzN {\n  text-align: center;\n  margin-bottom: 10px;\n  margin-left: 10px;\n  padding: 20px;\n  border: 2px;\n  border-radius: 25px;\n  background: #E2D8D4;\n  display: inline-block;\n  width: 800px;\n  word-wrap: break-word;\n}\n\n\n.styles__bizinput___CMJXA {\n padding: 20px;\n text-align: center;\n \n}\n\n.styles__locinput___3Cz8w {\n padding: 20px;\n margin-left: 45px;\n}\n\n.styles__catcontainer___2JQ92 {\n   padding: 20px;\n   width: 300px;\n   margin-left: 400px;\n   text-align: center;\n}\n\n.styles__categories___3ZKx2 {\n  width: 400px;\n  border: 2px;\n  margin-bottom: 10px;\n  margin-left: 10px;\n}\n\n.styles__catpick___2R-sv {\n  cursor: pointer;\n  text-align: center;\n}\n\n.styles__submit___2BcZC {\n  margin-left: 10px;\n}\n\n.styles__headerstyles___1Ot2C {\n  padding: 20px;\n  margin-left:  -18px;\n  cursor: pointer;\n}\n", ""]);
+	exports.push([module.id, ".styles__reviewContainer___e4XtJ {\n text-align: center;\n}\n\n.styles__reviewInfo___2SAUl {\n\n}\n\n.styles__reviewAddress___2hgmR {\n\n\n}\n\n.styles__workerpicture___uJIik {\n  width: 250px;\n  height: 110px;\n  float:left;\n  border: 1px solid red;\n  padding: 50px;\n}\n\n.styles__workerdata___3ZdZg {\n  border: 1px;\n  overflow: hidden;\n}\n\n.styles__reviewEntry___3jrzN {\n  text-align: center;\n  margin-bottom: 10px;\n  margin-left: 10px;\n  padding: 20px;\n  border: 2px;\n  border-radius: 25px;\n  background: #E2D8D4;\n  display: inline-block;\n  width: 800px;\n  word-wrap: break-word;\n}\n\n\n.styles__bizinput___CMJXA {\n padding: 20px;\n text-align: center;\n \n}\n\n.styles__locinput___3Cz8w {\n padding: 20px;\n margin-left: 45px;\n}\n\n.styles__catcontainer___2JQ92 {\n   padding: 40px;\n   text-align: center;\n}\n\n.styles__categories___3ZKx2 {\n  width: 400px;\n  border: 2px;\n  margin-bottom: 10px;\n  margin-left: 10px;\n}\n\n.styles__catpick___2R-sv {\n  cursor: pointer;\n  text-align: center;\n}\n\n.styles__submit___2BcZC {\n  margin-left: 10px;\n}\n\n.styles__headerstyles___1Ot2C {\n  padding: 20px;\n  margin-left:  -18px;\n  cursor: pointer;\n}\n", ""]);
 	
 	// exports
 	exports.locals = {
