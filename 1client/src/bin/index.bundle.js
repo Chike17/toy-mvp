@@ -261,21 +261,21 @@
 	            _react2.default.createElement(
 	              'span',
 	              { onClick: function () {
-	                  this.filterCategory('Barbershops');
+	                  this.filterCategory('Barbers');
 	                }.bind(this) },
 	              ' Barbers | '
 	            ),
 	            _react2.default.createElement(
 	              'span',
 	              { onClick: function () {
-	                  this.filterCategory('Nail Salons');
+	                  this.filterCategory('Nail Technicians');
 	                }.bind(this) },
 	              ' Nail Technicians | '
 	            ),
 	            _react2.default.createElement(
 	              'span',
 	              { onClick: function () {
-	                  this.filterCategory('Massage Parlors');
+	                  this.filterCategory('Masseuses');
 	                }.bind(this) },
 	              ' Massueses '
 	            )

@@ -152,9 +152,9 @@
           
          <div className = {styles.catpick}>
          <p >
-         <span onClick = {function () { this.filterCategory('Barbershops'); }.bind(this) }> Barbers | </span>
-         <span onClick = {function () { this.filterCategory('Nail Salons'); }.bind(this) }> Nail Technicians | </span>
-         <span onClick = {function () { this.filterCategory('Massage Parlors'); }.bind(this) }> Massueses </span> 
+         <span onClick = {function () { this.filterCategory('Barbers'); }.bind(this) }> Barbers | </span>
+         <span onClick = {function () { this.filterCategory('Nail Technicians'); }.bind(this) }> Nail Technicians | </span>
+         <span onClick = {function () { this.filterCategory('Masseuses'); }.bind(this) }> Massueses </span> 
          </p>
          </div>
 
