@@ -9,6 +9,5 @@
 4. Filter by Category by clicking on the business category.
 5. Do a live search for business names and locations.
 
-Locations: Boston, San Francisco, Chicago.
 Example names to search: Will Smith, Nelson Mandela, Jack Nicholson.
 Example locations to search: Boston, San Franciso, Chicago.
