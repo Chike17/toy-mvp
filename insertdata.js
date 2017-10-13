@@ -3,7 +3,6 @@ var db = require('./2back-end/dbconfig.js');
 var WorkReviewSchema = require('./2back-end/models.js');
 mongoose.Promise = require('bluebird');
 
-
 // Stock Dummy Data
 
 var nailSalonReview = {'FirstName': 'Dummy Nail Salon First Name', 'LastName': 'Dummy Nail Salon Last Name', 'Review': 'Dummy Nail Salon Review', 'Rating': 'Dummy Nail Salon Rating', 'Category': 'Nail Salons', 'Review': 'Dummy Nail Salon Review'};
@@ -14,42 +13,45 @@ var massageParlorReview = {'FirstName': 'Dummy Massage Parlor First Name', 'Last
 
 var stockData = [nailSalonReview, barberShopReview, massageParlorReview];
 
-
 // // 3 Silly Dummy Reviews
 
-// var sillyNailReview = new Review({
-//   'name': 'Neverland Nails', 
-//   'review': 'Great Nail Salon. My feet look great!', 
-//   'rating': '5', 
-//   'location': 'Chicago', 
-//   'category': 'Nail Salon'});
+var sillyNailReview = new WorkReviewSchema({
+  'FirstName': 'Jack', 
+  'LastName': 'Nicholson', 
+  'Rating': '5', 
+  'Location': 'Chicago',
+  'Review': 'The man works magic!',
+  'Category': 'Nail Salons'});
 
-// sillyNailReview.save();
+sillyNailReview.save();
 
-// var sillyMassageReview = new Review({
-//   'name': 'Manly Massages', 
-//   'review': 'My back never felt better!!! These guys are legit!', 
-//   'rating': '5', 
-//   'location': 'Boston', 
-//   'category': 'Massage Parlor'});
 
-// sillyMassageReview.save();
+var sillyMassageReview = new WorkReviewSchema({
+  'FirstName': 'Will', 
+  'LastName': 'Smith', 
+  'Rating': '5', 
+  'Location': 'Boston',
+  'Review': 'Always on point.',
+  'Category': 'Massage Parlors'});
 
-// var sillyBarberShopReview = new Review({
-//   'name': 'Fine Cutz', 
-//   'review': 'My hair is anything but fine. Its a mess. Never Again!', 
-//   'rating': '2', 
-//   'location': 'San Francisco', 
-//   'category': 'BarberShops'});
+sillyMassageReview.save();
 
-// sillyBarberShopReview.save();
+
+var sillyBarberReview = new WorkReviewSchema({
+  'FirstName': 'Nelson', 
+  'LastName': 'Mandela', 
+  'Rating': '5', 
+  'Location': 'Chicago',
+  'Review': 'Where did Madiba learn how to cut like this???',
+  'Category': 'Barbershops'});
+
+sillyBarberReview.save();
 
 
 var locations = ['Chicago', 'San Francisco', 'Boston'];
 
 
-// // insert multiple stock reviews in random locations with random ratings
-
+// // insert multiple stock reviews in random locations with random ratings+
 
 
 var insertStockReviews = function () {
@@ -72,14 +74,14 @@ var insertStockReviews = function () {
 };
 
 
-// for (var i = 0; i < 20; i++) {
-//   insertStockReviews();
-// }
+for (var i = 0; i < 20; i++) {
+  insertStockReviews();
+}
 
 
-// WorkReviewSchema.find({}, function (error, data) {
-//   console.log(data);
-// });
+WorkReviewSchema.find({}, function (error, data) {
+  console.log(data);
+});
 
 
 

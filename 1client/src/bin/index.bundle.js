@@ -207,17 +207,27 @@
 	          if (data[0].name === 'INVALID QUERY') {
 	            context.setState({ location: 'INVALID QUERY', category: 'INVALID QUERY', reviews: data });
 	          } else {
-	            context.setState({ location: data[0].Location, category: 'All Categories' }, function () {
+	            context.setState({ location: data[0].Location, category: data[0].Category }, function () {
 	              data.reduce(function (acc, review, index, array) {
-	                console.log(acc);
 	                if (acc === false) {
-	                  context.setState({ Location: 'Multiple Locations' });
+	                  context.setState({ location: 'Multiple Locations' });
 	                }
 	                if (index + 1 !== array.length) {
 	                  return acc && array[index].Location === array[index + 1].Location;
 	                }
 	              }, true);
+	
+	              data.reduce(function (acc, review, index, array) {
+	                console.log(acc, '&&&&&&&&&&&&&&&');
+	                if (acc === false) {
+	                  context.setState({ category: 'Multiple Categories' });
+	                }
+	                if (index + 1 !== array.length) {
+	                  return acc && array[index].Category === array[index + 1].Category;
+	                }
+	              }, true);
 	            });
+	
 	            context.setState({ reviews: data });
 	          }
 	        },
@@ -267,7 +277,7 @@
 	              { onClick: function () {
 	                  this.filterCategory('Massage Parlors');
 	                }.bind(this) },
-	              ' Massuueses '
+	              ' Massueses '
 	            )
 	          )
 	        ),
@@ -33269,8 +33279,6 @@
 	var _styles2 = _interopRequireDefault(_styles);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	//should call this component input2
 	
 	var Review = function Review(_ref) {
 	  var queryFirstName = _ref.queryFirstName,

@@ -114,17 +114,27 @@
          if (data[0].name === 'INVALID QUERY') {
            context.setState({location: 'INVALID QUERY', category: 'INVALID QUERY', reviews: data});
          } else {
-           context.setState({location: data[0].Location, category: 'All Categories'}, function () {
+           context.setState({location: data[0].Location, category: data[0].Category}, function () {
              data.reduce(function (acc, review, index, array) {
-              console.log(acc);
                if (acc === false) {
-                 context.setState({Location: 'Multiple Locations'});
+                 context.setState({location: 'Multiple Locations'});
                }
                if (index + 1 !== array.length) {
                  return acc && array[index].Location === array[index + 1].Location;
                }
              }, true);
+
+             data.reduce(function (acc, review, index, array) {
+               console.log(acc, '&&&&&&&&&&&&&&&');
+               if (acc === false) {
+                 context.setState({category: 'Multiple Categories'});
+               }
+               if (index + 1 !== array.length) {
+                 return acc && array[index].Category === array[index + 1].Category;
+               }
+             }, true);
            });
+
            context.setState({reviews: data});
          }
        },
@@ -144,7 +154,7 @@
          <p >
          <span onClick = {function () { this.filterCategory('Barbershops'); }.bind(this) }> Barbers | </span>
          <span onClick = {function () { this.filterCategory('Nail Salons'); }.bind(this) }> Nail Technicians | </span>
-         <span onClick = {function () { this.filterCategory('Massage Parlors'); }.bind(this) }> Massuueses </span> 
+         <span onClick = {function () { this.filterCategory('Massage Parlors'); }.bind(this) }> Massueses </span> 
          </p>
          </div>
 

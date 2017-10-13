@@ -10,4 +10,5 @@
 5. Do a live search for business names and locations.
 
 Locations: Boston, San Francisco, Chicago.
-Example business names to search: Fine Cutz, Neverland Nails, Manly Massages.
+Example names to search: Will Smith, Nelson Mandela, Jack Nicholson.
+Example locations to search: Boston, San Franciso, Chicago.

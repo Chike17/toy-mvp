@@ -1,7 +1,6 @@
 import React from 'react';
 import Reviews from './Reviews.js';
 import styles from './styles.css';
-//should call this component input2
 
 var Review = ({queryFirstName, queryLastName, category, location, queryCategory, inputLocation, reviews, getBizLoc}) => {
   return (
@@ -9,6 +8,7 @@ var Review = ({queryFirstName, queryLastName, category, location, queryCategory,
    <div>
 
    <form onSubmit = { getBizLoc } >
+
    <div className = {styles.bizinput}>
         <label>
           First Name :
