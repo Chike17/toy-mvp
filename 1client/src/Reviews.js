@@ -2,11 +2,11 @@ import React from 'react';
 import styles from './styles.css';
 
 var Reviews = (props) => {
+  // console.log(props.eachReview, 'XXXXXXX');
   return (
     <div className = {styles.reviewContainer}>
 
       {props.eachReview.map((review) => 
-
       <div className = {styles.reviewEntry}>
 
       <div className = {styles.workerpicture} > 
@@ -27,11 +27,9 @@ var Reviews = (props) => {
 
       	   <div> Location: {review.Location} </div>
 
-      	   <div> Review: {review.Review} </div>
-
+      	   <div > Review: {review.Review[0] } </div>
 
          </div>
-
 
        </div>
 

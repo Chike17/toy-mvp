@@ -13,15 +13,19 @@ var massageParlorReview = {'FirstName': 'Dummy Massage Parlor First Name', 'Last
 
 var stockData = [nailSalonReview, barberShopReview, massageParlorReview];
 
-// // 3 Silly Dummy Reviews
+
+// 3 Silly Dummy Reviews
 
 var sillyNailReview = new WorkReviewSchema({
   'FirstName': 'Jack', 
   'LastName': 'Nicholson', 
   'Rating': '5', 
   'Location': 'Chicago',
-  'Review': 'The man works magic!',
+  // 'Review': 'The man works magic!',
   'Category': 'Nail Technicians'});
+
+sillyNailReview.Review.push('The man works magic!');
+sillyNailReview.Review.push('The man is a dud!');
 
 sillyNailReview.save();
 
@@ -30,9 +34,12 @@ var sillyMassageReview = new WorkReviewSchema({
   'FirstName': 'Will', 
   'LastName': 'Smith', 
   'Rating': '5', 
-  'Location': 'Boston',
-  'Review': 'Always on point.',
+  // 'Location': 'Boston',
+  // 'Review': 'Always on point.',
   'Category': 'Masseuses'});
+
+sillyMassageReview.Review.push('Always on point!');
+sillyMassageReview.Review.push('Never on point');
 
 sillyMassageReview.save();
 
@@ -42,8 +49,12 @@ var sillyBarberReview = new WorkReviewSchema({
   'LastName': 'Mandela', 
   'Rating': '5', 
   'Location': 'Chicago',
-  'Review': 'Where did Madiba learn how to cut like this???',
+  // 'Review': 'Where did Madiba learn how to cut like this???',
   'Category': 'Barbers'});
+
+sillyBarberReview.Review.push('Where did Madiba learn how to cut like this?');
+sillyBarberReview.Review.push('Madiba is not very good at cutting hair man.');
+
 
 sillyBarberReview.save();
 
@@ -51,7 +62,7 @@ sillyBarberReview.save();
 var locations = ['Chicago', 'San Francisco', 'Boston'];
 
 
-// insert multiple stock reviews in random locations with random ratings+
+// insert multiple stock reviews in random locations with random ratings
 
 
 var insertStockReviews = function () {
@@ -65,9 +76,10 @@ var insertStockReviews = function () {
         'LastName': stockData[i].LastName, 
         'Rating': randomRating, 
         'Location': randomLocation, 
-        'Review': stockData[i].Review,
         'Category': stockData[i].Category
       });
+    rvw.Review.push('Good Good review');
+    rvw.Review.push('Bad Bad review');
     rvw.save();
     console.log(rvw);
   }
@@ -79,8 +91,14 @@ for (var i = 0; i < 20; i++) {
 
 
 WorkReviewSchema.find({}, function (error, data) {
+  // console.log(data[0]['Review'][0]);
   console.log(data);
 });
+
+
+// WorkReviewSchema.remove({}, function (error, data) {
+//   console.log(data);
+// });
 
 
 

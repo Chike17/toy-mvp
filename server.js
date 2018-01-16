@@ -20,6 +20,7 @@ app.use(express.static(__dirname));
 app.get('/alldata', function (req, res) {
   Review.find({}).exec(function (error, data) {
     res.send(data);
+    console.log(data, '***********');
   });
 });
 
@@ -68,7 +69,6 @@ app.post('/getspecbiz', function (req, res) {
     }
   });
 });
-
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');

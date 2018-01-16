@@ -17,7 +17,7 @@ WorkerReviewSchema = new Schema({
   'Rating': String,
   'Location': String,
   'Category': String,
-  'Review': String
+  'Review': Array
 });
 
 module.exports = mongoose.model('reviews', WorkerReviewSchema);
