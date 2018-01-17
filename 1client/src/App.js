@@ -1,17 +1,19 @@
 import React from 'react';
 import styles from './styles.css';
-import reviews from './init.js';
+import init from './init.js';
 import Review from './Review.js';
 import { connect } from 'react-redux';
 import $ from 'jquery';
 import store from './store.js';
+import { setLocation, setCategory } from './Actions/detailsActions.js';
+import { setFname, setLname } from './Actions/nameActions';
 
 class App extends React.Component {
 
    constructor (props) {
      super(props);
      this.state = {
-       reviews: reviews,
+       reviews: init.reviews,
        category: 'All Categories',
        location: 'All Locations',
      };
@@ -112,7 +114,7 @@ class App extends React.Component {
        dataType: 'json',
        success: function (data) {
          if (data.length === 0 ) {
-           context.setState({reviews: [{name: 'NOT FOUND '}], location: 'NOT FOUND ', category: 'NOT FOUND'});
+           context.setState({reviews: [ { Review: ['NOT FOUND'], FirstName: 'NOT FOUND', LastName: 'NOT FOUND', 'Rating': 'NOT FOUND', Category: 'NOT FOUND', Location: 'NOT FOUND'}], location: 'NOT FOUND', category: 'NOT FOUND'});
            return;
          } 
          if (data[0].name === 'INVALID QUERY') {
@@ -186,28 +188,16 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setFname: (fName) => {
-      dispatch({
-        type: 'CHANGE_FIRSTNAME',
-        payload: fName
-      });
+      dispatch(setFname(fName));
     },
     setLname: (lName) => {
-      dispatch({
-        type: 'CHANGE_LASTNAME',
-        payload: lName
-      });
+      dispatch(setLname(lName));
     },
     setLocation: (location) => {
-      dispatch({
-        type: 'CHANGE_LOCATION',
-        payload: location
-      });
+      dispatch(setLocation(location));
     },
     setCategory: (category) => {
-      dispatch({
-        type: 'CHANGE_CATEGORY',
-        payload: category
-      });
+      dispatch(setCategory(category));
     }
   };
 

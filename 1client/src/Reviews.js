@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './styles.css';
 
 var Reviews = (props) => {
-  // console.log(props.eachReview, 'XXXXXXX');
   return (
     <div className = {styles.reviewContainer}>
 
