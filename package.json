@@ -2,7 +2,6 @@
   "name": "take-care",
   "version": "1.0.0",
   "description": "self-care and grooming",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "ww": "webpack -d --watch",

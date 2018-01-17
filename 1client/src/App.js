@@ -4,7 +4,7 @@ import reviews from './init.js';
 import Review from './Review.js';
 import { connect } from 'react-redux';
 import $ from 'jquery';
-
+import store from './store.js';
 
 class App extends React.Component {
 
@@ -14,10 +14,6 @@ class App extends React.Component {
        reviews: reviews,
        category: 'All Categories',
        location: 'All Locations',
-       // queryLocation: '',
-       // queryCategory: '',
-       // firstName: '',
-       // lastName: ''
      };
    }
 
@@ -63,24 +59,24 @@ class App extends React.Component {
    }
 
    filterCategory (value) {
-     // var context = this;
-     // console.log({'query': value});
-     // $.ajax({
-     //   type: 'POST',
-     //   data: {'query': value},
-     //   url: 'http://localhost:3000/filter',
-     //   dataType: 'json',
-     //   success: function (data) {
-     //     console.log('success');
-     //     console.log(data);
-     //     context.setState({reviews: data, location: 'All locations'});
-     //   },
-     //   error: function (error) {
-     //     console.log('you have an error');
-     //     console.log(error);
-     //   }
-     // });
-     // context.setState({category: value});
+     var context = this;
+     console.log({'query': value});
+     $.ajax({
+       type: 'POST',
+       data: {'query': value},
+       url: 'http://localhost:3000/filter',
+       dataType: 'json',
+       success: function (data) {
+         console.log('success');
+         console.log(data);
+         context.setState({reviews: data, location: 'All locations'});
+       },
+       error: function (error) {
+         console.log('you have an error');
+         console.log(error);
+       }
+     });
+     context.setState({category: value});
    }
    fetchAllReviews () {
      var context = this;
@@ -101,52 +97,55 @@ class App extends React.Component {
        }
      });
    }
-   // handleBizLoc (e) {
-   //   e.preventDefault();
-   //   console.log(this.state.queryLocation);
-   //   var context = this;
-   //   $.ajax({
-   //     type: 'POST',
-   //     data: {'submit': 
-   //     {firstName: context.state.firstName, lastName: context.state.lastName, category: context.state.queryCategory, location: context.state.queryLocation}},
-   //     url: 'http://localhost:3000/getspecbiz',
-   //     dataType: 'json',
-   //     success: function (data) {
-   //       if (data.length === 0 ) {
-   //         context.setState({reviews: [{name: 'NOT FOUND '}], location: 'NOT FOUND ', category: 'NOT FOUND'});
-   //         return;
-   //       } 
-   //       if (data[0].name === 'INVALID QUERY') {
-   //         context.setState({location: 'INVALID QUERY', category: 'INVALID QUERY', reviews: data});
-   //       } else {
-   //         context.setState({location: data[0].Location, category: data[0].Category}, function () {
-   //           data.reduce(function (acc, review, index, array) {
-   //             if (acc === false) {
-   //               context.setState({location: 'Multiple Locations'});
-   //             }
-   //             if (index + 1 !== array.length) {
-   //               return acc && array[index].Location === array[index + 1].Location;
-   //             }
-   //           }, true);
+   handleBizLoc (e) {
+     e.preventDefault();
+     console.log(this.state.queryLocation);
+     var context = this;
+     $.ajax({
+       type: 'POST',
+       data: {'submit': 
+       {firstName: store.getState().nameReducer.firstName, 
+ 		lastName: store.getState().nameReducer.lastName, 
+ 		category: store.getState().detailsReducer.category, 
+ 		location: store.getState().detailsReducer.location}},
+       url: 'http://localhost:3000/getspecbiz',
+       dataType: 'json',
+       success: function (data) {
+         if (data.length === 0 ) {
+           context.setState({reviews: [{name: 'NOT FOUND '}], location: 'NOT FOUND ', category: 'NOT FOUND'});
+           return;
+         } 
+         if (data[0].name === 'INVALID QUERY') {
+           context.setState({location: 'INVALID QUERY', category: 'INVALID QUERY', reviews: data});
+         } else {
+           context.setState({location: data[0].Location, category: data[0].Category}, function () {
+             data.reduce(function (acc, review, index, array) {
+               if (acc === false) {
+                 context.setState({location: 'Multiple Locations'});
+               }
+               if (index + 1 !== array.length) {
+                 return acc && array[index].Location === array[index + 1].Location;
+               }
+             }, true);
 
-   //           data.reduce(function (acc, review, index, array) {
-   //             if (acc === false) {
-   //               context.setState({category: 'Multiple Categories'});
-   //             }
-   //             if (index + 1 !== array.length) {
-   //               return acc && array[index].Category === array[index + 1].Category;
-   //             }
-   //           }, true);
-   //         });
-   //         context.setState({reviews: data});
-   //       }
-   //     },
-   //     error: function (error) {
-   //       console.log('you have an error');
-   //       console.log(error);
-   //     }
-   //   });
-   // }
+             data.reduce(function (acc, review, index, array) {
+               if (acc === false) {
+                 context.setState({category: 'Multiple Categories'});
+               }
+               if (index + 1 !== array.length) {
+                 return acc && array[index].Category === array[index + 1].Category;
+               }
+             }, true);
+           });
+           context.setState({reviews: data});
+         }
+       },
+       error: function (error) {
+         console.log('you have an error');
+         console.log(error);
+       }
+     });
+   }
 
    render() {
      return (
@@ -161,13 +160,15 @@ class App extends React.Component {
          </p>
          </div>
 
-         <Review reviews = {reviews} 
+         <Review reviews = {this.state.reviews} 
          category = {this.state.category} 
          location = {this.state.location} 
          queryFirstName = {this.queryFirstName.bind(this)} 
          queryLastName = {this.queryLastName.bind(this)} 
          queryCategory = {this.queryCategory.bind(this)} 
-         inputLocation = {this.queryByLocation.bind(this)}/>
+         inputLocation = {this.queryByLocation.bind(this)}
+         getBizLoc = {this.handleBizLoc.bind(this)} 
+         />
         </div>
      );
    }
